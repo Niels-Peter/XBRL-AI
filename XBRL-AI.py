@@ -7,19 +7,19 @@ Created on Tue Jan 30 09:40:44 2018
 """
 
 __title__ = 'XBRL-AI'
-__version__ = '0.0.1'
+__version__ = '0.0.2'
 __author__ = 'Niels-Peter Rønmos'
 
 import requests
 from xmljson import badgerfish as bf
 from xml.etree.ElementTree import fromstring
 
-def XBRLinstans_to_dict(XBRLinstant): 
+def XBRLinstance_to_dict(XBRLinstance): 
     """
     Transforming XBRL-instant to python dictionary 
     """
     ## From XBRL to dict
-    XBRLdict = bf.data(fromstring(XBRLinstant))['{http://www.xbrl.org/2003/instance}xbrl']    
+    XBRLdict = bf.data(fromstring(XBRLinstance))['{http://www.xbrl.org/2003/instance}xbrl']    
 
     ## Extract unit information
     UN = {}   
@@ -72,7 +72,7 @@ def XBRLinstans_to_dict(XBRLinstant):
     return XBRLdict
 
 
-#test
-target_url = "http://regnskaber.virk.dk/27851382/ZG9rdW1lbnRsYWdlcjovLzAzLzY4L2U1LzgyLzNlLzFmOGMtNDJiNS05MDNjLWUwYWI5OTMzNTg1MA.xml"
-file_indhold = requests.get(target_url).content 
-sample = XBRLinstans_to_dict(file_indhold)
+##test
+#target_url = "http://regnskaber.virk.dk/27851382/ZG9rdW1lbnRsYWdlcjovLzAzLzY4L2U1LzgyLzNlLzFmOGMtNDJiNS05MDNjLWUwYWI5OTMzNTg1MA.xml"
+#file_indhold = requests.get(target_url).content 
+#sample = XBRLinstance_to_dict(file_indhold)
