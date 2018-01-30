@@ -4,11 +4,11 @@ The purpuse off this project is to apply XBRL in AI and Machine learning, by usa
 
 The project will be divided into 3 part:
 1. Generic XBRL to AI.
-..* XBRL-AI.py
+  * XBRL-AI.py
 2. XBRL in Danish GAAP og Danish IFRS (with extension) to AI
-..* To be added
+  * To be added
 3. Sample of Machine Learning implementation based on this project
---* To be added
+  * To be added
 
 ## Why this project?
 
