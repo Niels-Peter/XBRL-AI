@@ -6,6 +6,7 @@ Created on Wed Jan 31 11:16:07 2018
 @author: niels-peter
 """
 
+import requests
 from xbrl_ai import xbrlinstance_to_dict
 from xbrl_ai_dk import fetchlist_dk
 
@@ -16,7 +17,7 @@ __author__ = 'Niels-Peter Rønmos'
 
 
 """
-This testsample fetch metadata om newest annual report from 
+This testsample fetch metadata om newest annual report from
 company with Business Register Number 30004000 on date 015-10-31
 and load it into xbrldoc_as_dict
 """
