@@ -1,7 +1,5 @@
 name: xbrl_ai
 channels:
-  - http://dfd:Tpkr6sURdoifySBrhe+xjnUdrsPJXY6XkCPc+DgJL3c@condapkgs-dfd.pi.prod.atp.local/
-  - http://dfd:Tpkr6sURdoifySBrhe+xjnUdrsPJXY6XkCPc+DgJL3c@condapkgs-dfd.prod.atp.local/
   - defaults
   - conda-forge
 dependencies:
