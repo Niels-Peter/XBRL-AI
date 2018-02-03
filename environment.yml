@@ -1,0 +1,43 @@
+name: xbrl_ai
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - asn1crypto=0.24.0=py36_0
+  - ca-certificates=2017.08.26=h94faf87_0
+  - certifi=2018.1.18=py36_0
+  - cffi=1.11.4=py36hfa6e2cd_0
+  - chardet=3.0.4=py36h420ce6e_1
+  - colorama=0.3.9=py36h029ae33_0
+  - cryptography=2.1.4=py36he1d7878_0
+  - decorator=4.2.1=py36_0
+  - idna=2.6=py36h148d497_1
+  - ipython=6.2.1=py36h9cf0123_1
+  - ipython_genutils=0.2.0=py36h3c5d0ee_0
+  - jedi=0.11.1=py36_0
+  - openssl=1.0.2n=h74b6da3_0
+  - parso=0.1.1=py36hae3edee_0
+  - pickleshare=0.7.4=py36h9de030f_0
+  - pip=9.0.1=py36h226ae91_4
+  - prompt_toolkit=1.0.15=py36h60b8f86_0
+  - pycparser=2.18=py36hd053e01_1
+  - pygments=2.2.0=py36hb010967_0
+  - pyopenssl=17.5.0=py36h5b7d817_0
+  - pysocks=1.6.7=py36h698d350_1
+  - python=3.6.4=h6538335_1
+  - requests=2.18.4=py36h4371aae_1
+  - setuptools=38.4.0=py36_0
+  - simplegeneric=0.8.1=py36heab741f_0
+  - six=1.11.0=py36h4db2310_1
+  - traitlets=4.3.2=py36h096827d_0
+  - urllib3=1.22=py36h276f60a_0
+  - vc=14=h0510ff6_3
+  - vs2015_runtime=14.0.25123=3
+  - wcwidth=0.1.7=py36h3d5aa90_0
+  - wheel=0.30.0=py36h6c3ec14_1
+  - win_inet_pton=1.0.1=py36he67d7fd_1
+  - wincertstore=0.2=py36h7fe50ca_0
+  - pip:
+    - xmljson==0.1.9
+prefix: C:\Users\rar\AppData\Local\Continuum\miniconda3\envs\xbrl_ai
+
