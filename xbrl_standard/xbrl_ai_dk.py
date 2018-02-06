@@ -8,6 +8,7 @@ Created on Wed Jan 31 09:10:49 2018
 import time
 import collections
 import requests
+from datetime import datetime, timedelta
 
 
 __title__ = 'xbrl_ai_dk'
