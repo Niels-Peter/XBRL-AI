@@ -11,7 +11,7 @@ import requests
 
 
 __title__ = 'xbrl_ai_dk'
-__version__ = '0.0.1'
+__version__ = '0.0.2'
 __author__ = 'Niels-Peter Rønmos'
 
 
@@ -253,3 +253,83 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
                     dimension_list = None
                 dict64[nogle] = [value, unit, decimals, dimension_list]
     return dict64
+
+def xbrl_dk_64_to_xbrl_dk_11(dict64):
+    # Find metadata!!!
+    koncern = False
+    units = {}
+    languages = {}
+    periods = {}
+    PrecedingReportingPeriodStartDate = PredingReportingPeriodEndDate\
+        = PredingReportingPeriodEndDate_temp = None
+    for post in dict64:
+        if post[0] == 'gsd:ReportingPeriodStartDate':
+            ReportingPeriodStartDate = (dict64[post])[0]
+        if post[0] == 'gsd:ReportingPeriodEndDate':
+            ReportingPeriodEndDate = (dict64[post])[0]
+        if post[0] == 'gsd:PrecedingReportingPeriodStartDate':
+            PrecedingReportingPeriodStartDate = (dict64[post])[0]
+        if post[0] == 'gsd:PredingReportingPeriodEndDate':
+            PredingReportingPeriodEndDate = (dict64[post])[0]
+        if post[4] is True:
+            koncern = True
+        if type(post[5]).__name__ != 'NoneType':
+            if (post[1], post[2]) not in periods:
+                periods[post[1], post[2]] = 1
+            else:
+                periods[post[1], post[2]] = periods[post[1], post[2]] + 1
+            if post[5] not in units:
+                if post[5][0:3] == 'iso':
+                    units[post[5]] = 1
+            else:
+                units[post[5]] = units[post[5]] + 1
+            if post[5] not in languages:
+                if post[5][0:5] == 'lang:':
+                    languages[post[5]] = 1
+            else:
+                languages[post[5]] = languages[post[5]] + 1
+    unitmax = 0
+    language = None
+    for post in units:
+        if units[post] > unitmax:
+            unitmax = units[post]
+            unit = post
+    languagemax = 0
+    for post in languages:
+        if languages[post] > languagemax:
+            languagemax = languages[post]
+            language = post
+    Metadata = {}
+    Metadata['unit'] = unit
+    Metadata['language'] = language
+    Metadata['koncern'] = koncern
+    Metadata['ReportingPeriodEndDate'] = ReportingPeriodEndDate
+    Metadata['ReportingPeriodStartDate'] = ReportingPeriodStartDate
+    if PrecedingReportingPeriodStartDate is None or\
+            PredingReportingPeriodEndDate is None:
+        PredingReportingPeriodEndDate_temp\
+            = str(datetime.strptime(ReportingPeriodStartDate, '%Y-%m-%d') - timedelta(days=1))[:10]
+    periodmax = 0
+    for post in periods:
+        if post[1] == PredingReportingPeriodEndDate_temp and type(post[0]).__name__ != 'NoneType'\
+                and periods[post] > periodmax:
+            PredingReportingPeriodEndDate = PredingReportingPeriodEndDate_temp
+            periodmax = periods[post]
+            PrecedingReportingPeriodStartDate = post[0]
+            
+    Metadata['PrecedingReportingPeriodStartDate'] = PrecedingReportingPeriodStartDate
+    Metadata['PredingReportingPeriodEndDate'] = PredingReportingPeriodEndDate
+    
+    dict11 = {}
+    dict11['metadata'] = Metadata
+    for key in dict64:
+        if key[1] == ReportingPeriodStartDate and key[2] == ReportingPeriodEndDate and key[3] == None and key[4] == Metadata['koncern'] and (key[5] == Metadata['unit'] or key[5] == None or key[5] == Metadata['language']):
+            dict11[key[0]] = dict64[key][0]
+        if key[1] == None and key[2] == ReportingPeriodEndDate and key[3] == None and key[4] == Metadata['koncern'] and (key[5] == Metadata['unit'] or key[5] == None or key[5] == Metadata['language']):
+            dict11[key[0]] = dict64[key][0]
+        if key[1] == PrecedingReportingPeriodStartDate and key[2] == PredingReportingPeriodEndDate and key[3] == None and key[4] == Metadata['koncern'] and (key[5] == Metadata['unit'] or key[5] == None or key[5] == Metadata['language']):
+            dict11[key[0] + '_prev'] = dict64[key][0]
+        if key[1] == None and key[2] == PredingReportingPeriodEndDate and key[3]\
+                == None and key[4] == Metadata['koncern'] and (key[5] == Metadata['unit'] or key[5] == None or key[5] == Metadata['language']):
+            dict11[key[0] + '_prev'] = dict64[key][0]
+    return dict11
