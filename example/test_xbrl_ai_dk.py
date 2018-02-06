@@ -7,8 +7,8 @@ Created on Wed Jan 31 11:16:07 2018
 """
 
 import requests
-from xbrl_ai import xbrlinstance_to_dict
-from xbrl_ai_dk import fetchlist_dk, xbrldict_to_xbrl_dk_64
+from xbrl_ai.xbrl_ai import xbrlinstance_to_dict
+from xbrl_standard.xbrl_ai_dk import fetchlist_dk, xbrldict_to_xbrl_dk_64
 
 
 __title__ = 'test_xbrl_ai_dk'

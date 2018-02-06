@@ -33,3 +33,10 @@ for windows, or
 for linux.
 
 You can now run the test_xbrl_ai_dk.py.
+
+## Installation
+
+Download the files and run the following command from the folder:
+```
+>> python setup.py install
+```
