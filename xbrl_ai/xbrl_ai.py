@@ -7,11 +7,15 @@ Created on Tue Jan 30 09:40:44 2018
 """
 
 __title__ = 'xbrl_ai'
-__version__ = '0.0.3'
+__version__ = '0.0.4'
 __author__ = 'Niels-Peter Rønmos'
 
 from xml.etree.ElementTree import fromstring
 from xmljson import badgerfish as bf
+import time
+import collections
+import requests
+from datetime import datetime, timedelta
 
 
 def xbrlinstance_to_dict(xbrlinstance):
