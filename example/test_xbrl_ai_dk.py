@@ -17,17 +17,23 @@ __author__ = 'Niels-Peter Rønmos'
 
 
 """
-This testsample fetch metadata om newest annual report from
+This testsample fetch metadata om newest apal report from
 company with Business Register Number 30004000 on date 015-10-31
 and load it into xbrldoc_as_dict
 """
 
-metadata = fetchlist_dk('30004000', '2015-10-31')
-#metadata = fetchlist_dk('61056416', '2015-10-31')
-
-
+# Step 1:
+#metadata = fetchlist_dk('30004000', '2015-10-31')
+metadata = fetchlist_dk('61056416', '2015-10-31')
 targeturl = metadata['dokumentUrl']
+
+# Step 2:
 xbrldoc_as_dict = xbrlinstance_to_dict(requests.get(targeturl).content)
+
+# Step 3:
 xbrl_as_dk_64 = xbrldict_to_xbrl_dk_64(xbrldoc_as_dict)
+
+# Step 4:
 xbrl_as_dk_11 = xbrl_dk_64_to_xbrl_dk_11(xbrl_as_dk_64)
+
 
