@@ -110,9 +110,7 @@ def fetchlist_dk(cvrnummer, date='dd', reports='AARSRAPPORT', style='dict'):
 def xbrldict_to_xbrl_dk_64(xbrldict):
     """
     SKAL rettes til:
-        - explicit/typed dimension som 4 felt på data!!!
         - Strategi ved dobbeltfelter med afvigende value/decimal
-        - Precision?
     """
 
     def get_xbrlkey(post, char):
@@ -160,7 +158,7 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
         explicit_liste_od = collections.OrderedDict(sorted(explicit_liste.items()))
         for keys in explicit_liste_od:
             label_extend = label_extend + '_' + explicit_liste_od[keys]
-            dimension_list.append(keys[0])
+            dimension_list.append(keys)
         return koncern, label_extend, dimension_list
 
     def typed_list(typed):
@@ -200,6 +198,8 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
         decimals = inputdata.get('@decimals', None)
         context = inputdata['context']
         lang = inputdata.get('@{http://www.w3.org/XML/1998/namespace}lang', None)
+        if type(lang).__name__ != 'NoneType':
+            lang = 'lang:' + lang
         # identificer = context[0]
         startdate = context[2]
         enddate = context[3]
@@ -255,7 +255,7 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
                 dict64[nogle] = [value, unit, decimals, dimension_list]
     return dict64
 
-def xbrl_dk_64_to_xbrl_dk_11(dict64):
+def xbrl_dk_64_to_xbrl_dk_11(dict64, metadata = False):
     # Find metadata!!!
     koncern = False
     units = {}
@@ -291,11 +291,13 @@ def xbrl_dk_64_to_xbrl_dk_11(dict64):
                 languages[post[5]] = languages[post[5]] + 1
     unitmax = 0
     language = None
+    #print(languages)
     for post in units:
         if units[post] > unitmax:
             unitmax = units[post]
             unit = post
     languagemax = 0
+    #print(languages)
     for post in languages:
         if languages[post] > languagemax:
             languagemax = languages[post]
@@ -322,7 +324,8 @@ def xbrl_dk_64_to_xbrl_dk_11(dict64):
     Metadata['PredingReportingPeriodEndDate'] = PredingReportingPeriodEndDate
     
     dict11 = {}
-    dict11['metadata'] = Metadata
+    if metadata == True:
+        dict11['metadata'] = Metadata
     for key in dict64:
         if key[1] == ReportingPeriodStartDate and key[2] == ReportingPeriodEndDate and key[3] == None and key[4] == Metadata['koncern'] and (key[5] == Metadata['unit'] or key[5] == None or key[5] == Metadata['language']):
             dict11[key[0]] = dict64[key][0]
