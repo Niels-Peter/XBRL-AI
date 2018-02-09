@@ -11,8 +11,6 @@ setup(
       author_email = " ",
       url = "https://github.com/Niels-Peter/XBRL-AI",
       packages =  find_packages(),
-      #modules = ['xbrl_ai'],
-
       long_description = "To be written",
       classifiers = [
               "Programming lanquage :: Python",

@@ -9,10 +9,13 @@ import time
 import collections
 import requests
 from datetime import datetime, timedelta
+from sklearn.base import BaseEstimator, TransformerMixin
+import numpy as np
+from xbrl_ai import xbrlinstance_to_dict
 
 
 __title__ = 'xbrl_ai_dk'
-__version__ = '0.0.2'
+__version__ = '0.0.3'
 __author__ = 'Niels-Peter Rønmos'
 
 
@@ -291,13 +294,11 @@ def xbrl_dk_64_to_xbrl_dk_11(dict64, metadata = False):
                 languages[post[5]] = languages[post[5]] + 1
     unitmax = 0
     language = None
-    #print(languages)
     for post in units:
         if units[post] > unitmax:
             unitmax = units[post]
             unit = post
     languagemax = 0
-    #print(languages)
     for post in languages:
         if languages[post] > languagemax:
             languagemax = languages[post]
@@ -314,7 +315,8 @@ def xbrl_dk_64_to_xbrl_dk_11(dict64, metadata = False):
             = str(datetime.strptime(ReportingPeriodStartDate, '%Y-%m-%d') - timedelta(days=1))[:10]
     periodmax = 0
     for post in periods:
-        if post[1] == PredingReportingPeriodEndDate_temp and type(post[0]).__name__ != 'NoneType'\
+        if post[1] == PredingReportingPeriodEndDate_temp\
+                and type(post[0]).__name__ != 'NoneType'\
                 and periods[post] > periodmax:
             PredingReportingPeriodEndDate = PredingReportingPeriodEndDate_temp
             periodmax = periods[post]
@@ -327,13 +329,43 @@ def xbrl_dk_64_to_xbrl_dk_11(dict64, metadata = False):
     if metadata == True:
         dict11['metadata'] = Metadata
     for key in dict64:
-        if key[1] == ReportingPeriodStartDate and key[2] == ReportingPeriodEndDate and key[3] == None and key[4] == Metadata['koncern'] and (key[5] == Metadata['unit'] or key[5] == None or key[5] == Metadata['language']):
+        if key[1] == ReportingPeriodStartDate and key[2]\
+            == ReportingPeriodEndDate and key[3] == None and key[4]\
+            == Metadata['koncern']\
+            and (key[5] == Metadata['unit'] or key[5] == None or key[5] == Metadata['language']):
             dict11[key[0]] = dict64[key][0]
-        if key[1] == None and key[2] == ReportingPeriodEndDate and key[3] == None and key[4] == Metadata['koncern'] and (key[5] == Metadata['unit'] or key[5] == None or key[5] == Metadata['language']):
+        if key[1] == None and key[2] == ReportingPeriodEndDate and key[3]\
+                == None and key[4] == Metadata['koncern']\
+                and (key[5] == Metadata['unit'] or key[5] == None or key[5] == Metadata['language']):
             dict11[key[0]] = dict64[key][0]
-        if key[1] == PrecedingReportingPeriodStartDate and key[2] == PredingReportingPeriodEndDate and key[3] == None and key[4] == Metadata['koncern'] and (key[5] == Metadata['unit'] or key[5] == None or key[5] == Metadata['language']):
+        if key[1] == PrecedingReportingPeriodStartDate and key[2]\
+                == PredingReportingPeriodEndDate and key[3] == None\
+                and key[4] == Metadata['koncern']\
+                and (key[5] == Metadata['unit'] or key[5] == None or key[5] == Metadata['language']):
             dict11[key[0] + '_prev'] = dict64[key][0]
         if key[1] == None and key[2] == PredingReportingPeriodEndDate and key[3]\
-                == None and key[4] == Metadata['koncern'] and (key[5] == Metadata['unit'] or key[5] == None or key[5] == Metadata['language']):
+                == None and key[4] == Metadata['koncern']\
+                and (key[5] == Metadata['unit'] or key[5] == None or key[5] == Metadata['language']):
             dict11[key[0] + '_prev'] = dict64[key][0]
     return dict11
+
+
+class xbrldocs_to_dict(BaseEstimator, TransformerMixin):
+    """Extract features from each XBRL document for DictVectorizer etc."""
+
+    def fit(self, x, y=None):
+        return self
+
+    def transform(self, posts):
+        outputdata = []
+        for indhold in posts:
+            metadata = fetchlist_dk(str(indhold[0]), (indhold[1]))
+            targeturl = metadata['dokumentUrl']
+            xbrldoc_as_dict\
+                = xbrlinstance_to_dict(requests.get(targeturl).content)
+            xbrl_as_dk_64 = xbrldict_to_xbrl_dk_64(xbrldoc_as_dict)
+            xbrl_as_dk_11 = xbrl_dk_64_to_xbrl_dk_11(xbrl_as_dk_64)
+            outputdata\
+                = np.append(outputdata, [xbrl_as_dk_11], axis=0)
+        return outputdata
+    

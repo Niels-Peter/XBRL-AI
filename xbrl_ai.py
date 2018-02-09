@@ -42,9 +42,21 @@ def xbrlinstance_to_dict(xbrlinstance):
             = instant = explicit = typed = None
         entity = post['{http://www.xbrl.org/2003/instance}entity']
         for element in entity:
-            print(element, entity[element])
-            identifier = (entity[element])['$']
-            scheme = (entity[element])['@scheme']
+            try:
+                identifier = (entity[element])['$']
+                scheme = (entity[element])['@scheme']
+            except LookupError:
+                pass
+            try:
+                explicit = (entity['{http://www.xbrl.org/2003/instance}segment'])\
+                    ['{http://xbrl.org/2006/xbrldi}explicitMember']
+            except LookupError:
+                pass
+            try:
+                typed = (entity['{http://www.xbrl.org/2003/instance}segment'])\
+                    ['{http://xbrl.org/2006/xbrldi}typedMember']
+            except LookupError:
+                pass
         period = post['{http://www.xbrl.org/2003/instance}period']
         try:
             startdate\
@@ -73,7 +85,6 @@ def xbrlinstance_to_dict(xbrlinstance):
             pass
         contextlist[post['@id']] = [identifier,\
                    scheme, startdate, enddate, instant, explicit, typed]
-    # RemCOcoove unit and context information as they are extracted
     for opryd in ('{http://www.xbrl.org/2003/instance}context',
                   '{http://www.xbrl.org/2003/instance}unit'):
         del xbrldict[opryd]
