@@ -175,6 +175,8 @@ def xbrldict_to_xbrl_54(xbrldict):
         decimals = inputdata.get('@decimals', None)
         context = inputdata['context']
         lang = inputdata.get('@{http://www.w3.org/XML/1998/namespace}lang', None)
+        if type(lang).__name__ != 'NoneType':
+            lang = 'lang:' + lang
         startdate = context[2]
         enddate = context[3]
         instant = context[4]
