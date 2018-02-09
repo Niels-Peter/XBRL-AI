@@ -1,7 +1,7 @@
 # !/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
       name = "xbrl_ai",
@@ -10,7 +10,8 @@ setup(
       author = "Niels-Peter Rønmos",
       author_email = " ",
       url = "https://github.com/Niels-Peter/XBRL-AI",
-      packages = ['xbrl_ai'],
+      packages =  find_packages(),
+      #modules = ['xbrl_ai'],
 
       long_description = "To be written",
       classifiers = [
