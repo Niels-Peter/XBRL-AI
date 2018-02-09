@@ -8,7 +8,7 @@ Created on Wed Jan 31 11:16:07 2018
 
 import requests
 from xbrl_ai import xbrlinstance_to_dict
-from xbrl_ai.xbrl_ai_dk import fetchlist_dk, xbrldict_to_xbrl_dk_64, xbrl_dk_64_to_xbrl_dk_11
+from xbrl_local.xbrl_ai_dk import fetchlist_dk, xbrldict_to_xbrl_dk_64, xbrl_dk_64_to_xbrl_dk_11
 
 
 __title__ = 'test_xbrl_ai_dk'
@@ -23,10 +23,10 @@ and load it into xbrldoc_as_dict
 """
 
 # Step 1:
-#metadata = fetchlist_dk('30004000', '2015-10-31')
+metadata = fetchlist_dk('30004000', '2015-10-31')
 #metadata = fetchlist_dk('61056416', '2015-10-31')
 #metadata = fetchlist_dk('36714565', date='2016-12-31', reports='ALL', style='dict')
-metadata = fetchlist_dk('11964346', '2016-08-31')
+#metadata = fetchlist_dk('11964346', '2016-08-31')
 
 
 targeturl = metadata['dokumentUrl']
