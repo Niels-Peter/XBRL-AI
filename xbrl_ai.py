@@ -42,6 +42,7 @@ def xbrlinstance_to_dict(xbrlinstance):
             = instant = explicit = typed = None
         entity = post['{http://www.xbrl.org/2003/instance}entity']
         for element in entity:
+            print(element, entity[element])
             identifier = (entity[element])['$']
             scheme = (entity[element])['@scheme']
         period = post['{http://www.xbrl.org/2003/instance}period']

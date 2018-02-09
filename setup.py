@@ -7,10 +7,10 @@ setup(
       name = "xbrl_ai",
       version = "0.2",
       description = "Making XRBL avaiable for Machine learning",
-      author = " ",
+      author = "Niels-Peter Rønmos",
       author_email = " ",
       url = "https://github.com/Niels-Peter/XBRL-AI",
-      packages = ['xbrl_ai', 'xbrl_standard'],
+      packages = ['xbrl_ai'],
 
       long_description = "To be written",
       classifiers = [
