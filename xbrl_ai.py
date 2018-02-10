@@ -29,11 +29,27 @@ def xbrlinstance_to_dict(xbrlinstance):
     unit = xbrldict['{http://www.xbrl.org/2003/instance}unit']
     if type(unit).__name__ == 'list':
         for post in unit:
-            unitlist[post['@id']]\
-                = (post['{http://www.xbrl.org/2003/instance}measure'])['$']
+            try:
+                unitlist[post['@id']] = (post['{http://www.xbrl.org/2003/instance}measure'])['$']
+            except LookupError:
+                pass               
+            try:
+                divide = post['{http://www.xbrl.org/2003/instance}divide']
+                unitlist[post['@id']] = ((divide['{http://www.xbrl.org/2003/instance}unitNumerator'])['{http://www.xbrl.org/2003/instance}measure'])['$'] + '/'\
+                    + ((divide['{http://www.xbrl.org/2003/instance}unitDenominator'])['{http://www.xbrl.org/2003/instance}measure'])['$']
+            except LookupError:
+                pass                           
     if type(unit).__name__ == 'OrderedDict':
-        unitlist[unit['@id']]\
-            = (unit['{http://www.xbrl.org/2003/instance}measure'])['$']
+        try:
+            unitlist[unit['@id']] = (unit['{http://www.xbrl.org/2003/instance}measure'])['$']
+        except LookupError:
+            pass               
+        try:
+            divide = unit['{http://www.xbrl.org/2003/instance}divide']
+            unitlist[inut['@id']] = ((divide['{http://www.xbrl.org/2003/instance}unitNumerator'])['{http://www.xbrl.org/2003/instance}measure'])['$'] + '/'\
+                + ((divide['{http://www.xbrl.org/2003/instance}unitDenominator'])['{http://www.xbrl.org/2003/instance}measure'])['$']
+        except LookupError:
+                pass
     # Extract context information
     contexts = xbrldict['{http://www.xbrl.org/2003/instance}context']
     contextlist = {}
@@ -202,8 +218,22 @@ def xbrldict_to_xbrl_54(xbrldict):
             xbrlref = ref[(ref.rfind('/') - len(ref) + 1):]
             if type(xbrldict[post]).__name__ == 'list':
                 for element in xbrldict[post]:
-                    value, unit, decimals, startdate, enddate, lang, label_extend,\
-                        label_typed, label_typed_id, dimension_list = concept_data(element)
+                    if element.get('context', 'missing') != 'missing':
+                        value, unit, decimals, startdate, enddate, lang, label_extend,\
+                            label_typed, label_typed_id, dimension_list = concept_data(element)
+                        concept = xbrlref + ':' + get_xbrlkey(post, '}') + label_extend + label_typed
+                        if type(unit).__name__ == 'NoneType':
+                            unit = lang
+                        nogle = (concept, startdate, enddate, label_typed_id, unit)
+                        if nogle in dict54 and dict54[nogle][0] != value:
+                            print('!!!!!!!!!', nogle, value, unit, decimals, dict54[nogle])
+                        if len(str(dimension_list)) < 5:
+                            dimension_list = None
+                        dict54[nogle] = [value, unit, decimals, dimension_list]
+            if type(xbrldict[post]).__name__ == 'OrderedDict':
+                if (xbrldict[post]).get('context', 'missing') != 'missing':
+                    value, unit, decimals, startdate, enddate, lang, label_extend, label_typed,\
+                        label_typed_id, dimension_list = concept_data(xbrldict[post])
                     concept = xbrlref + ':' + get_xbrlkey(post, '}') + label_extend + label_typed
                     if type(unit).__name__ == 'NoneType':
                         unit = lang
@@ -213,16 +243,4 @@ def xbrldict_to_xbrl_54(xbrldict):
                     if len(str(dimension_list)) < 5:
                         dimension_list = None
                     dict54[nogle] = [value, unit, decimals, dimension_list]
-            if type(xbrldict[post]).__name__ == 'OrderedDict':
-                value, unit, decimals, startdate, enddate, lang, label_extend, label_typed,\
-                    label_typed_id, dimension_list = concept_data(xbrldict[post])
-                concept = xbrlref + ':' + get_xbrlkey(post, '}') + label_extend + label_typed
-                if type(unit).__name__ == 'NoneType':
-                    unit = lang
-                nogle = (concept, startdate, enddate, label_typed_id, unit)
-                if nogle in dict54 and dict54[nogle][0] != value:
-                    print('!!!!!!!!!', nogle, value, unit, decimals, dict54[nogle])
-                if len(str(dimension_list)) < 5:
-                    dimension_list = None
-                dict54[nogle] = [value, unit, decimals, dimension_list]
     return dict54
