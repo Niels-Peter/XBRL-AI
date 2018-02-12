@@ -350,7 +350,7 @@ def xbrl_dk_64_to_xbrl_dk_11(dict64, metadata = False):
     return dict11
 
 
-class xbrldocs_to_dict(BaseEstimator, TransformerMixin):
+class xbrl_to_dk_11(BaseEstimator, TransformerMixin):
     """Extract features from each XBRL document for DictVectorizer etc."""
 
     def fit(self, x, y=None):

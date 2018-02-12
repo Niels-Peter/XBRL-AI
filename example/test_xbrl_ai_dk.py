@@ -8,7 +8,7 @@ Created on Wed Jan 31 11:16:07 2018
 
 import requests
 from xbrl_ai import xbrlinstance_to_dict
-from xbrl_local.xbrl_ai_dk import fetchlist_dk, xbrldict_to_xbrl_dk_64, xbrl_dk_64_to_xbrl_dk_11, xbrldocs_to_dict
+from xbrl_local.xbrl_ai_dk import fetchlist_dk, xbrldict_to_xbrl_dk_64, xbrl_dk_64_to_xbrl_dk_11, xbrl_to_dk_11
 
 
 __title__ = 'test_xbrl_ai_dk'
@@ -47,7 +47,7 @@ input_data = [['30004000', '2015-10-31'],
               ['36714565', '2016-12-31'],
               ['11964346', '2016-08-31']] 
 
-get_data = xbrldocs_to_dict()
+get_data = xbrl_to_dk_11()
 data_transformed = get_data.transform(input_data)
 
 

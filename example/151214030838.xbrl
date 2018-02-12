@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Data created by Bundesanzeiger Verlag / BDS --><!-- Trust Rank: green#green#green -->
+<xbrl xmlns="http://www.xbrl.org/2003/instance" xmlns:link="http://www.xbrl.org/2003/linkbase" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:de-gaap-ci="http://www.xbrl.de/taxonomies/de-gaap-ci-2013-04-30" xsi:schemaLocation="http://www.xbrl.de/taxonomies/de-gaap-ci-2013-04-30 de-gaap-ci-2013-04-30.xsd" xmlns:de-gcd="http://www.xbrl.de/taxonomies/de-gcd-2013-04-30">
+<link:schemaRef xlink:type="simple" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase" xlink:href="de-gaap-ci-2013-04-30.xsd"/>
+<link:schemaRef xlink:type="simple" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase" xlink:href="de-gcd-2013-04-30.xsd"/>
+
+
+
+<unit id="id151214030838_UNIT"><measure xmlns:iso4217="http://www.xbrl.org/2003/iso4217">iso4217:EUR</measure></unit>
+
+<!-- #### CONTEXT #### -->
+<context id="id151214030838_CY_INSTANT">
+<entity><identifier scheme="http://www.bundesanzeiger.de/ebanz">151214030838</identifier>
+</entity><period>
+<instant>2014-12-31</instant>
+</period></context>
+<context id="id151214030838_CY_DURATION">
+<entity><identifier scheme="http://www.bundesanzeiger.de/ebanz">151214030838</identifier>
+</entity><period>
+<startDate>2014-01-01</startDate>
+<endDate>2014-12-31</endDate>
+</period></context>
+<context id="id151214030838_PY_INSTANT">
+<entity><identifier scheme="http://www.bundesanzeiger.de/ebanz">151214030838</identifier>
+</entity><period>
+<instant>2013-12-31</instant>
+</period></context>
+<context id="id151214030838_PY_DURATION">
+<entity><identifier scheme="http://www.bundesanzeiger.de/ebanz">151214030838</identifier>
+</entity><period>
+<startDate>2013-01-01</startDate>
+<endDate>2013-12-31</endDate>
+</period></context>
+
+<de-gcd:genInfo.doc.id.generationDate contextRef="id151214030838_CY_DURATION">2017-03-28</de-gcd:genInfo.doc.id.generationDate>
+<de-gcd:genInfo.company.id contextRef="id151214030838_CY_DURATION">102371814</de-gcd:genInfo.company.id>
+<de-gcd:genInfo.company.id.sizeClass contextRef="id151214030838_CY_DURATION">3</de-gcd:genInfo.company.id.sizeClass>
+<de-gcd:genInfo.report.id contextRef="id151214030838_CY_DURATION">151214030838</de-gcd:genInfo.report.id>
+<de-gcd:genInfo.report.id.accordingTo.yearEnd contextRef="id151214030838_CY_DURATION">2014-12-31</de-gcd:genInfo.report.id.accordingTo.yearEnd>
+<de-gcd:genInfo.report.id.reportType contextRef="id151214030838_CY_DURATION">135_JahresabschlussFinanzbericht</de-gcd:genInfo.report.id.reportType>
+<de-gcd:genInfo.company.id.name contextRef="id151214030838_CY_DURATION">Dow Olefinverbund GmbH</de-gcd:genInfo.company.id.name>
+<de-gcd:genInfo.company.id.location contextRef="id151214030838_CY_DURATION">Schkopau</de-gcd:genInfo.company.id.location>
+<de-gcd:genInfo.company.id.location.street contextRef="id151214030838_CY_DURATION">Berthastr. 13</de-gcd:genInfo.company.id.location.street>
+<de-gcd:genInfo.company.id.location.zipCode contextRef="id151214030838_CY_DURATION">06258</de-gcd:genInfo.company.id.location.zipCode>
+<de-gcd:genInfo.company.id.location.city contextRef="id151214030838_CY_DURATION">Schkopau</de-gcd:genInfo.company.id.location.city>
+<de-gcd:genInfo.company.id.location.country contextRef="id151214030838_CY_DURATION">Deutschland</de-gcd:genInfo.company.id.location.country>
+<de-gcd:genInfo.company.id.industry.keyType.industryKey.WZ2008 contextRef="id151214030838_CY_DURATION">2059</de-gcd:genInfo.company.id.industry.keyType.industryKey.WZ2008>
+<de-gcd:genInfo.company.id.industry.keyType.industryKey.WZ2008 contextRef="id151214030838_CY_DURATION">4675</de-gcd:genInfo.company.id.industry.keyType.industryKey.WZ2008>
+<de-gcd:genInfo.company.id.industry.keyType.industryKey.WZ2008 contextRef="id151214030838_CY_DURATION"/>
+
+<!-- #### data-section #### -->
+<de-gaap-ci:bs.ass contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">2194685464.33</de-gaap-ci:bs.ass>
+<de-gaap-ci:bs.ass.currAss contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">943375088.80</de-gaap-ci:bs.ass.currAss>
+<de-gaap-ci:bs.ass.currAss.cashEquiv contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">1038.13</de-gaap-ci:bs.ass.currAss.cashEquiv>
+<de-gaap-ci:bs.ass.currAss.inventory contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">52590476.38</de-gaap-ci:bs.ass.currAss.inventory>
+<de-gaap-ci:bs.ass.currAss.inventory.finishedAndMerch contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">314529.23</de-gaap-ci:bs.ass.currAss.inventory.finishedAndMerch>
+<de-gaap-ci:bs.ass.currAss.inventory.finishedAndMerch.goods contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">314529.23</de-gaap-ci:bs.ass.currAss.inventory.finishedAndMerch.goods>
+<de-gaap-ci:bs.ass.currAss.inventory.material contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">52275947.15</de-gaap-ci:bs.ass.currAss.inventory.material>
+<de-gaap-ci:bs.ass.currAss.inventory.other contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">0.00</de-gaap-ci:bs.ass.currAss.inventory.other>
+<de-gaap-ci:bs.ass.currAss.receiv contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">890783574.29</de-gaap-ci:bs.ass.currAss.receiv>
+<de-gaap-ci:bs.ass.currAss.receiv.affil contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">807983333.00</de-gaap-ci:bs.ass.currAss.receiv.affil>
+<de-gaap-ci:bs.ass.currAss.receiv.other contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">56700056.71</de-gaap-ci:bs.ass.currAss.receiv.other>
+<de-gaap-ci:bs.ass.currAss.receiv.shareholders contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">127070.16</de-gaap-ci:bs.ass.currAss.receiv.shareholders>
+<de-gaap-ci:bs.ass.currAss.receiv.trade contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">25973114.42</de-gaap-ci:bs.ass.currAss.receiv.trade>
+<de-gaap-ci:bs.ass.fixAss contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">1249411301.12</de-gaap-ci:bs.ass.fixAss>
+<de-gaap-ci:bs.ass.fixAss.fin contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">889147698.30</de-gaap-ci:bs.ass.fixAss.fin>
+<de-gaap-ci:bs.ass.fixAss.fin.particip contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">582872.75</de-gaap-ci:bs.ass.fixAss.fin.particip>
+<de-gaap-ci:bs.ass.fixAss.fin.sharesInAffil contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">888564825.55</de-gaap-ci:bs.ass.fixAss.fin.sharesInAffil>
+<de-gaap-ci:bs.ass.fixAss.intan contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">46547682.73</de-gaap-ci:bs.ass.fixAss.intan>
+<de-gaap-ci:bs.ass.fixAss.intan.advPaym contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">1237024.12</de-gaap-ci:bs.ass.fixAss.intan.advPaym>
+<de-gaap-ci:bs.ass.fixAss.intan.concessionBrands contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">45310658.61</de-gaap-ci:bs.ass.fixAss.intan.concessionBrands>
+<de-gaap-ci:bs.ass.fixAss.tan contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">313715920.09</de-gaap-ci:bs.ass.fixAss.tan>
+<de-gaap-ci:bs.ass.fixAss.tan.inConstrAdvPaym contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">18028065.76</de-gaap-ci:bs.ass.fixAss.tan.inConstrAdvPaym>
+<de-gaap-ci:bs.ass.fixAss.tan.landBuildings contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">156252031.83</de-gaap-ci:bs.ass.fixAss.tan.landBuildings>
+<de-gaap-ci:bs.ass.fixAss.tan.machinery contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">134079924.53</de-gaap-ci:bs.ass.fixAss.tan.machinery>
+<de-gaap-ci:bs.ass.fixAss.tan.otherEquipm contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">5355897.97</de-gaap-ci:bs.ass.fixAss.tan.otherEquipm>
+<de-gaap-ci:bs.ass.prepaidExp contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">1899074.41</de-gaap-ci:bs.ass.prepaidExp>
+<de-gaap-ci:bs.eqLiab contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">2194685464.33</de-gaap-ci:bs.eqLiab>
+<de-gaap-ci:bs.eqLiab.accruals contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">166818700.42</de-gaap-ci:bs.eqLiab.accruals>
+<de-gaap-ci:bs.eqLiab.accruals.other contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">75815904.07</de-gaap-ci:bs.eqLiab.accruals.other>
+<de-gaap-ci:bs.eqLiab.accruals.pensions contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">75607011.00</de-gaap-ci:bs.eqLiab.accruals.pensions>
+<de-gaap-ci:bs.eqLiab.accruals.tax contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">15395785.35</de-gaap-ci:bs.eqLiab.accruals.tax>
+<de-gaap-ci:bs.eqLiab.defIncome contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">20972321.55</de-gaap-ci:bs.eqLiab.defIncome>
+<de-gaap-ci:bs.eqLiab.equity contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">1898307543.92</de-gaap-ci:bs.eqLiab.equity>
+<de-gaap-ci:bs.eqLiab.equity.capRes contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">1080772490.50</de-gaap-ci:bs.eqLiab.equity.capRes>
+<de-gaap-ci:bs.eqLiab.equity.netIncome contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">123196818.55</de-gaap-ci:bs.eqLiab.equity.netIncome>
+<de-gaap-ci:bs.eqLiab.equity.retainedEarnings contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">693781186.87</de-gaap-ci:bs.eqLiab.equity.retainedEarnings>
+<de-gaap-ci:bs.eqLiab.equity.revenueRes contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">347048.00</de-gaap-ci:bs.eqLiab.equity.revenueRes>
+<de-gaap-ci:bs.eqLiab.equity.subscribed contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">210000.00</de-gaap-ci:bs.eqLiab.equity.subscribed>
+<de-gaap-ci:bs.eqLiab.equity.subscribed.corp contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">210000.00</de-gaap-ci:bs.eqLiab.equity.subscribed.corp>
+<de-gaap-ci:bs.eqLiab.liab contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">93026951.23</de-gaap-ci:bs.eqLiab.liab>
+<de-gaap-ci:bs.eqLiab.liab.assocComp contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">48547917.53</de-gaap-ci:bs.eqLiab.liab.assocComp>
+<de-gaap-ci:bs.eqLiab.liab.other contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">5005366.90</de-gaap-ci:bs.eqLiab.liab.other>
+<de-gaap-ci:bs.eqLiab.liab.other.other contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">389477.65</de-gaap-ci:bs.eqLiab.liab.other.other>
+<de-gaap-ci:bs.eqLiab.liab.other.theroffTax contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">4615889.25</de-gaap-ci:bs.eqLiab.liab.other.theroffTax>
+<de-gaap-ci:bs.eqLiab.liab.trade contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">39473666.80</de-gaap-ci:bs.eqLiab.liab.trade>
+<de-gaap-ci:bs.eqLiab.otherSpecRes contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">15559947.21</de-gaap-ci:bs.eqLiab.otherSpecRes>
+<de-gaap-ci:bs.eqLiab.otherSpecRes.subsidies contextRef="id151214030838_CY_INSTANT" precision="2" unitRef="id151214030838_UNIT">15559947.21</de-gaap-ci:bs.eqLiab.otherSpecRes.subsidies>
+<de-gaap-ci:is.netIncome contextRef="id151214030838_CY_DURATION" precision="2" unitRef="id151214030838_UNIT">123196818.55</de-gaap-ci:is.netIncome>
+<de-gaap-ci:is.netIncome.extraord contextRef="id151214030838_CY_DURATION" precision="2" unitRef="id151214030838_UNIT">-2617800.00</de-gaap-ci:is.netIncome.extraord>
+<de-gaap-ci:is.netIncome.extraord.expenses contextRef="id151214030838_CY_DURATION" precision="2" unitRef="id151214030838_UNIT">2617800.00</de-gaap-ci:is.netIncome.extraord.expenses>
+<de-gaap-ci:is.netIncome.otherTaxes contextRef="id151214030838_CY_DURATION" precision="2" unitRef="id151214030838_UNIT">13256755.24</de-gaap-ci:is.netIncome.otherTaxes>
+<de-gaap-ci:is.netIncome.regular contextRef="id151214030838_CY_DURATION" precision="2" unitRef="id151214030838_UNIT">156325614.99</de-gaap-ci:is.netIncome.regular>
+<de-gaap-ci:is.netIncome.regular.fin contextRef="id151214030838_CY_DURATION" precision="2" unitRef="id151214030838_UNIT">100195296.92</de-gaap-ci:is.netIncome.regular.fin>
+<de-gaap-ci:is.netIncome.regular.fin.netInterest.expenses contextRef="id151214030838_CY_DURATION" precision="2" unitRef="id151214030838_UNIT">9323792.42</de-gaap-ci:is.netIncome.regular.fin.netInterest.expenses>
+<de-gaap-ci:is.netIncome.regular.fin.netInterest.expenses.assoc contextRef="id151214030838_CY_DURATION" precision="2" unitRef="id151214030838_UNIT">1053356.03</de-gaap-ci:is.netIncome.regular.fin.netInterest.expenses.assoc>
+<de-gaap-ci:is.netIncome.regular.fin.netInterest.income contextRef="id151214030838_CY_DURATION" precision="2" unitRef="id151214030838_UNIT">3070249.68</de-gaap-ci:is.netIncome.regular.fin.netInterest.income>
+<de-gaap-ci:is.netIncome.regular.fin.netInterest.income.assoc contextRef="id151214030838_CY_DURATION" precision="2" unitRef="id151214030838_UNIT">2091220.42</de-gaap-ci:is.netIncome.regular.fin.netInterest.income.assoc>
+<de-gaap-ci:is.netIncome.regular.fin.netParticipation.earningProfSharing contextRef="id151214030838_CY_DURATION" precision="2" unitRef="id151214030838_UNIT">106448839.66</de-gaap-ci:is.netIncome.regular.fin.netParticipation.earningProfSharing>
+<de-gaap-ci:is.netIncome.regular.fin.netParticipation.earningProfSharing.other contextRef="id151214030838_CY_DURATION" precision="2" unitRef="id151214030838_UNIT">106448839.66</de-gaap-ci:is.netIncome.regular.fin.netParticipation.earningProfSharing.other>
+<de-gaap-ci:is.netIncome.regular.operatingTC contextRef="id151214030838_CY_DURATION" precision="2" unitRef="id151214030838_UNIT">56130318.07</de-gaap-ci:is.netIncome.regular.operatingTC>
+<de-gaap-ci:is.netIncome.regular.operatingTC.deprAmort contextRef="id151214030838_CY_DURATION" precision="2" unitRef="id151214030838_UNIT">55929807.54</de-gaap-ci:is.netIncome.regular.operatingTC.deprAmort>
+<de-gaap-ci:is.netIncome.regular.operatingTC.deprAmort.fixAss contextRef="id151214030838_CY_DURATION" precision="2" unitRef="id151214030838_UNIT">55929807.54</de-gaap-ci:is.netIncome.regular.operatingTC.deprAmort.fixAss>
+<de-gaap-ci:is.netIncome.regular.operatingTC.grossTradingProfit contextRef="id151214030838_CY_DURATION" precision="2" unitRef="id151214030838_UNIT">473957488.99</de-gaap-ci:is.netIncome.regular.operatingTC.grossTradingProfit>
+<de-gaap-ci:is.netIncome.regular.operatingTC.grossTradingProfit.materialServices contextRef="id151214030838_CY_DURATION" precision="2" unitRef="id151214030838_UNIT">284728859.38</de-gaap-ci:is.netIncome.regular.operatingTC.grossTradingProfit.materialServices>
+<de-gaap-ci:is.netIncome.regular.operatingTC.grossTradingProfit.materialServices.material contextRef="id151214030838_CY_DURATION" precision="2" unitRef="id151214030838_UNIT">205641886.57</de-gaap-ci:is.netIncome.regular.operatingTC.grossTradingProfit.materialServices.material>
+<de-gaap-ci:is.netIncome.regular.operatingTC.grossTradingProfit.materialServices.services contextRef="id151214030838_CY_DURATION" precision="2" unitRef="id151214030838_UNIT">79086972.81</de-gaap-ci:is.netIncome.regular.operatingTC.grossTradingProfit.materialServices.services>
+<de-gaap-ci:is.netIncome.regular.operatingTC.grossTradingProfit.totalOutput contextRef="id151214030838_CY_DURATION" precision="2" unitRef="id151214030838_UNIT">683489339.71</de-gaap-ci:is.netIncome.regular.operatingTC.grossTradingProfit.totalOutput>
+<de-gaap-ci:is.netIncome.regular.operatingTC.grossTradingProfit.totalOutput.inventoryChange contextRef="id151214030838_CY_DURATION" precision="2" unitRef="id151214030838_UNIT">159561.00</de-gaap-ci:is.netIncome.regular.operatingTC.grossTradingProfit.totalOutput.inventoryChange>
+<de-gaap-ci:is.netIncome.regular.operatingTC.grossTradingProfit.totalOutput.netSales contextRef="id151214030838_CY_DURATION" precision="2" unitRef="id151214030838_UNIT">683329778.71</de-gaap-ci:is.netIncome.regular.operatingTC.grossTradingProfit.totalOutput.netSales>
+<de-gaap-ci:is.netIncome.regular.operatingTC.grossTradingProfit.totalOutput.ownWork contextRef="id151214030838_CY_DURATION" precision="2" unitRef="id151214030838_UNIT">0.00</de-gaap-ci:is.netIncome.regular.operatingTC.grossTradingProfit.totalOutput.ownWork>
+<de-gaap-ci:is.netIncome.regular.operatingTC.otherCost contextRef="id151214030838_CY_DURATION" precision="2" unitRef="id151214030838_UNIT">223371967.55</de-gaap-ci:is.netIncome.regular.operatingTC.otherCost>
+<de-gaap-ci:is.netIncome.regular.operatingTC.otherOpRevenue contextRef="id151214030838_CY_DURATION" precision="2" unitRef="id151214030838_UNIT">75197008.66</de-gaap-ci:is.netIncome.regular.operatingTC.otherOpRevenue>
+<de-gaap-ci:is.netIncome.regular.operatingTC.staff contextRef="id151214030838_CY_DURATION" precision="2" unitRef="id151214030838_UNIT">138525395.83</de-gaap-ci:is.netIncome.regular.operatingTC.staff>
+<de-gaap-ci:is.netIncome.regular.operatingTC.staff.salaries contextRef="id151214030838_CY_DURATION" precision="2" unitRef="id151214030838_UNIT">117493828.45</de-gaap-ci:is.netIncome.regular.operatingTC.staff.salaries>
+<de-gaap-ci:is.netIncome.regular.operatingTC.staff.social contextRef="id151214030838_CY_DURATION" precision="2" unitRef="id151214030838_UNIT">21031567.38</de-gaap-ci:is.netIncome.regular.operatingTC.staff.social>
+<de-gaap-ci:is.netIncome.regular.operatingTC.staff.social.other contextRef="id151214030838_CY_DURATION" precision="2" unitRef="id151214030838_UNIT">18684171.50</de-gaap-ci:is.netIncome.regular.operatingTC.staff.social.other>
+<de-gaap-ci:is.netIncome.regular.operatingTC.staff.social.pensions contextRef="id151214030838_CY_DURATION" precision="2" unitRef="id151214030838_UNIT">2347395.88</de-gaap-ci:is.netIncome.regular.operatingTC.staff.social.pensions>
+<de-gaap-ci:is.netIncome.tax contextRef="id151214030838_CY_DURATION" precision="2" unitRef="id151214030838_UNIT">17254241.20</de-gaap-ci:is.netIncome.tax>
+</xbrl>
