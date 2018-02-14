@@ -6,14 +6,13 @@ Created on Wed Jan 31 11:16:07 2018
 @author: niels-peter
 """
 
-import requests
-from xbrl_ai import xbrlinstance_to_dict
-from xbrl_local.xbrl_ai_dk import fetchlist_dk, xbrldict_to_xbrl_dk_64, xbrl_dk_64_to_xbrl_dk_11, xbrl_to_dk_11
-
-
 __title__ = 'test_xbrl_ai_dk'
 __version__ = '0.0.1'
 __author__ = 'Niels-Peter Rønmos'
+
+import requests
+from xbrl_ai import xbrlinstance_to_dict
+from xbrl_local.xbrl_ai_dk import fetchlist_dk, xbrldict_to_xbrl_dk_64, xbrl_dk_64_to_xbrl_dk_11, xbrl_to_dk_11
 
 
 """
@@ -34,7 +33,7 @@ xbrldoc_as_dict = xbrlinstance_to_dict(requests.get(targeturl).content)
 xbrl_as_dk_64 = xbrldict_to_xbrl_dk_64(xbrldoc_as_dict)
 
 # Step 4:
-xbrl_as_dk_11 = xbrl_dk_64_to_xbrl_dk_11(xbrl_as_dk_64)
+xbrl_as_dk_11 = xbrl_dk_64_to_xbrl_dk_11(xbrl_as_dk_64, True)
 
 
 """

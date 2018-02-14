@@ -256,6 +256,9 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
                 if len(str(dimension_list)) < 5:
                     dimension_list = None
                 dict64[nogle] = [value, unit, decimals, dimension_list]
+        if post in ('{http://www.xbrl.org/2003/linkbase}schemaRef',
+                    '@{http://www.w3.org/2001/XMLSchema-instance}schemaLocation'):
+            dict64[post] = xbrldict[post]
     return dict64
 
 def xbrl_dk_64_to_xbrl_dk_11(dict64, metadata = False):
@@ -347,6 +350,9 @@ def xbrl_dk_64_to_xbrl_dk_11(dict64, metadata = False):
                 == None and key[4] == Metadata['koncern']\
                 and (key[5] == Metadata['unit'] or key[5] == None or key[5] == Metadata['language']):
             dict11[key[0] + '_prev'] = dict64[key][0]
+        if key in ('{http://www.xbrl.org/2003/linkbase}schemaRef',
+                   '@{http://www.w3.org/2001/XMLSchema-instance}schemaLocation'):
+            Metadata[key] = dict64[key]
     return dict11
 
 

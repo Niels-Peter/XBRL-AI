@@ -243,4 +243,7 @@ def xbrldict_to_xbrl_54(xbrldict):
                     if len(str(dimension_list)) < 5:
                         dimension_list = None
                     dict54[nogle] = [value, unit, decimals, dimension_list]
+        if post in ('{http://www.xbrl.org/2003/linkbase}schemaRef',
+                    '@{http://www.w3.org/2001/XMLSchema-instance}schemaLocation'):
+            dict54[post] = xbrldict[post]
     return dict54
