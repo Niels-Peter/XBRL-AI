@@ -10,10 +10,11 @@ The project will be divided into 3 parts:
   * xbrl_ai_dk.py
 * German GAAP
   * xbrl_ai_de.py
-* US GAAP
-  * xbrl_ai_us.py
+
 3. Sample of Machine Learning implementation based on this project
   * test_xbrl_ai_dk.py
+  * test_xbrl_ai_de.py
+  * test_xbrl_ai_us.py
 
 ## Why this project?
 
