@@ -16,4 +16,4 @@ file = open('goog-20151231.xml', 'r')
 file_indhold = file.read()
 
 xbrl = xbrlinstance_to_dict(file_indhold)
-xbrl54 = xbrldict_to_xbrl_54(xbrl)
+xbrl_as_54 = xbrldict_to_xbrl_54(xbrl)

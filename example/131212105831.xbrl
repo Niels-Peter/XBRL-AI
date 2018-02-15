@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Data created by Bundesanzeiger Verlag / BDS --><!-- Trust Rank: green#green#blue -->
+<xbrl xmlns="http://www.xbrl.org/2003/instance" xmlns:de-gaap-ci="http://www.xbrl.de/de/fr/gaap/ci/2010-01-31" xmlns:de-gcd="http://www.xbrl.de/de/gcd/2010-01-31" xmlns:link="http://www.xbrl.org/2003/linkbase" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.xbrl.de/de/fr/gaap/ci/2010-01-31 de-gaap-ci-2010-01-31.xsd">
+<link:schemaRef xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase" xlink:href="de-gaap-ci-2010-01-31.xsd" xlink:type="simple"/>
+<link:schemaRef xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase" xlink:href="de-gcd-2010-01-31.xsd" xlink:type="simple"/>
+
+
+<unit id="id131212105831_UNIT"><measure xmlns:iso4217="http://www.xbrl.org/2003/iso4217">iso4217:EUR</measure></unit>
+
+<!-- #### CONTEXT #### -->
+<context id="id131212105831_CY_INSTANT">
+<entity><identifier scheme="http://www.bundesanzeiger.de/ebanz">131212105831</identifier>
+</entity><period>
+<instant>2012-12-31</instant>
+</period></context>
+<context id="id131212105831_CY_DURATION">
+<entity><identifier scheme="http://www.bundesanzeiger.de/ebanz">131212105831</identifier>
+</entity><period>
+<startDate>2012-01-01</startDate>
+<endDate>2012-12-31</endDate>
+</period></context>
+<context id="id131212105831_PY_INSTANT">
+<entity><identifier scheme="http://www.bundesanzeiger.de/ebanz">131212105831</identifier>
+</entity><period>
+<instant>2011-12-31</instant>
+</period></context>
+<context id="id131212105831_PY_DURATION">
+<entity><identifier scheme="http://www.bundesanzeiger.de/ebanz">131212105831</identifier>
+</entity><period>
+<startDate>2011-01-01</startDate>
+<endDate>2011-12-31</endDate>
+</period></context>
+
+<de-gcd:genInfo.doc.id.generationDate contextRef="id131212105831_CY_DURATION">2014-01-22</de-gcd:genInfo.doc.id.generationDate>
+<de-gcd:genInfo.company.id contextRef="id131212105831_CY_DURATION">100699465</de-gcd:genInfo.company.id>
+<de-gcd:genInfo.company.id.sizeClass contextRef="id131212105831_CY_DURATION">1</de-gcd:genInfo.company.id.sizeClass>
+<de-gcd:genInfo.report.id contextRef="id131212105831_CY_DURATION">131212105831</de-gcd:genInfo.report.id>
+<de-gcd:genInfo.report.id.accordingTo.yearEnd contextRef="id131212105831_CY_DURATION">2012-12-31</de-gcd:genInfo.report.id.accordingTo.yearEnd>
+<de-gcd:genInfo.report.id.reportType contextRef="id131212105831_CY_DURATION">135_JahresabschlussFinanzbericht</de-gcd:genInfo.report.id.reportType>
+<de-gcd:genInfo.company.id.name contextRef="id131212105831_CY_DURATION">PRN Werra-Meißner Gesellschaft für medizinische Prävention, Rehabilitation und Nachsorge mbH</de-gcd:genInfo.company.id.name>
+<de-gcd:genInfo.company.id.location contextRef="id131212105831_CY_DURATION">Witzenhausen</de-gcd:genInfo.company.id.location>
+<de-gcd:genInfo.company.id.location.street contextRef="id131212105831_CY_DURATION">Steinstr. 18 - 26</de-gcd:genInfo.company.id.location.street>
+<de-gcd:genInfo.company.id.location.zipCode contextRef="id131212105831_CY_DURATION">37213</de-gcd:genInfo.company.id.location.zipCode>
+<de-gcd:genInfo.company.id.location.city contextRef="id131212105831_CY_DURATION">Witzenhausen</de-gcd:genInfo.company.id.location.city>
+<de-gcd:genInfo.company.id.location.country contextRef="id131212105831_CY_DURATION">Deutschland</de-gcd:genInfo.company.id.location.country>
+<de-gcd:genInfo.company.id.industry.keyType.industryKey.WZ2008 contextRef="id131212105831_CY_DURATION">86909</de-gcd:genInfo.company.id.industry.keyType.industryKey.WZ2008>
+<de-gcd:genInfo.company.id.industry.keyType.industryKey.WZ2008 contextRef="id131212105831_CY_DURATION"/>
+<de-gcd:genInfo.company.id.industry.keyType.industryKey.WZ2008 contextRef="id131212105831_CY_DURATION"/>
+
+<!-- #### data-section #### -->
+<de-gaap-ci:bs.ass contextRef="id131212105831_CY_INSTANT" precision="2" unitRef="id131212105831_UNIT">155024.56</de-gaap-ci:bs.ass>
+<de-gaap-ci:bs.ass.currAss contextRef="id131212105831_CY_INSTANT" precision="2" unitRef="id131212105831_UNIT">153144.56</de-gaap-ci:bs.ass.currAss>
+<de-gaap-ci:bs.ass.currAss.cashEquiv contextRef="id131212105831_CY_INSTANT" precision="2" unitRef="id131212105831_UNIT">2243.61</de-gaap-ci:bs.ass.currAss.cashEquiv>
+<de-gaap-ci:bs.ass.currAss.receiv contextRef="id131212105831_CY_INSTANT" precision="2" unitRef="id131212105831_UNIT">150900.95</de-gaap-ci:bs.ass.currAss.receiv>
+<de-gaap-ci:bs.ass.fixAss contextRef="id131212105831_CY_INSTANT" precision="2" unitRef="id131212105831_UNIT">1880.00</de-gaap-ci:bs.ass.fixAss>
+<de-gaap-ci:bs.ass.fixAss.tan contextRef="id131212105831_CY_INSTANT" precision="2" unitRef="id131212105831_UNIT">1880.00</de-gaap-ci:bs.ass.fixAss.tan>
+<de-gaap-ci:bs.eqLiab contextRef="id131212105831_CY_INSTANT" precision="2" unitRef="id131212105831_UNIT">155024.56</de-gaap-ci:bs.eqLiab>
+<de-gaap-ci:bs.eqLiab.accruals contextRef="id131212105831_CY_INSTANT" precision="2" unitRef="id131212105831_UNIT">22644.37</de-gaap-ci:bs.eqLiab.accruals>
+<de-gaap-ci:bs.eqLiab.equity contextRef="id131212105831_CY_INSTANT" precision="2" unitRef="id131212105831_UNIT">38238.72</de-gaap-ci:bs.eqLiab.equity>
+<de-gaap-ci:bs.eqLiab.equity.netIncome contextRef="id131212105831_CY_INSTANT" precision="2" unitRef="id131212105831_UNIT">24488.49</de-gaap-ci:bs.eqLiab.equity.netIncome>
+<de-gaap-ci:bs.eqLiab.equity.retainedEarnings contextRef="id131212105831_CY_INSTANT" precision="2" unitRef="id131212105831_UNIT">-12087.44</de-gaap-ci:bs.eqLiab.equity.retainedEarnings>
+<de-gaap-ci:bs.eqLiab.equity.revenueRes contextRef="id131212105831_CY_INSTANT" precision="2" unitRef="id131212105831_UNIT">837.67</de-gaap-ci:bs.eqLiab.equity.revenueRes>
+<de-gaap-ci:bs.eqLiab.equity.subscribed contextRef="id131212105831_CY_INSTANT" precision="2" unitRef="id131212105831_UNIT">25000.00</de-gaap-ci:bs.eqLiab.equity.subscribed>
+<de-gaap-ci:bs.eqLiab.equity.subscribed.corp contextRef="id131212105831_CY_INSTANT" precision="2" unitRef="id131212105831_UNIT">25000.00</de-gaap-ci:bs.eqLiab.equity.subscribed.corp>
+<de-gaap-ci:bs.eqLiab.liab contextRef="id131212105831_CY_INSTANT" precision="2" unitRef="id131212105831_UNIT">94141.47</de-gaap-ci:bs.eqLiab.liab>
+</xbrl>

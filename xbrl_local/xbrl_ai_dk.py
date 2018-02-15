@@ -353,6 +353,17 @@ def xbrl_dk_64_to_xbrl_dk_11(dict64, metadata = False):
         if key in ('{http://www.xbrl.org/2003/linkbase}schemaRef',
                    '@{http://www.w3.org/2001/XMLSchema-instance}schemaLocation'):
             Metadata[key] = dict64[key]
+    compscore = 0
+    if dict11.get('fsa:Assets', 'mis') != 'mis' :
+        compscore = compscore + 1
+    if dict11.get('fsa:Assets_prev', 'mis') != 'mis':
+        compscore = compscore + 2
+    if dict11.get('fsa:ProfitLoss', 'mis') != 'mis':
+        compscore = compscore + 4
+    if dict11.get('fsa:ProfitLoss_prev', 'mis') != 'mis':
+        compscore = compscore + 8 
+    Metadata['compscore'] = compscore
+
     return dict11
 
 

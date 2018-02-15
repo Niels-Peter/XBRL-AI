@@ -20,11 +20,11 @@ Step by step
 """
 
 # Step 1:
-#metadata = fetchlist_dk('30004000', '2015-10-31')
-#metadata = fetchlist_dk('61056416', '2015-10-31')
-#metadata = fetchlist_dk('36714565', date='2016-12-31', reports='ALL', style='dict')
-metadata = fetchlist_dk('11964346', '2016-08-31')
-targeturl = metadata['dokumentUrl']
+#linkdata = fetchlist_dk('30004000', '2015-10-31')
+#linkdata = fetchlist_dk('61056416', '2015-10-31')
+#linkdata = fetchlist_dk('36714565', date='2016-12-31', reports='ALL', style='dict')
+linkdata = fetchlist_dk('11964346', '2016-08-31')
+targeturl = linkdata['dokumentUrl']
 
 # Step 2:
 xbrldoc_as_dict = xbrlinstance_to_dict(requests.get(targeturl).content)
