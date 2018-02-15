@@ -7,11 +7,11 @@ The project will be divided into 3 parts:
   * xbrl_ai.py
 2. XBRL in local GAAP including
 * Danish GAAP og Danish IFRS (with extension) to AI
-  ** xbrl_ai_dk.py
+  * xbrl_ai_dk.py
 * German GAAP
-  ** xbrl_ai_de.py
+  * xbrl_ai_de.py
 * US GAAP
-  ** xbrl_ai_us.py
+  * xbrl_ai_us.py
 3. Sample of Machine Learning implementation based on this project
   * test_xbrl_ai_dk.py
 
