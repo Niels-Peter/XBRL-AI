@@ -89,21 +89,21 @@ def xbrl_54_to_xbrl_de_11(dict54, metadata = False):
         if key[1] == ReportingPeriodStartDate\
                 and key[2] == ReportingPeriodEndDate and key[3] == None\
                 and (key[4] == Metadata['unit'] or key[4] == None or key[4] == Metadata['language']):
-            dict11[key[0]] = dict54[key][0]
+            dict11[get_xbrlkey(key[0], ":")] = dict54[key][0]
         if key[1] == None and key[2] == ReportingPeriodEndDate and key[3] == None\
                 and (key[4] == Metadata['unit'] or key[4] == None or key[4] == Metadata['language']):
-            dict11[key[0]] = dict54[key][0]
+            dict11[get_xbrlkey(key[0], ":")] = dict54[key][0]
         try:
             if key[1] == PrecedingReportingPeriodStartDate and key[2]\
                     == PrecedingReportingPeriodEndDate and key[3] == None\
                     and (key[4] == Metadata['unit'] or key[4] == None or key[4] == Metadata['language']):
-                dict11[key[0] + '_prev'] = dict54[key][0]
+                dict11[get_xbrlkey(key[0], ":") + '_prev'] = dict54[key][0]
         except:
             pass
         try:
             if key[1] == None and key[2] == PrecedingReportingPeriodEndDate and key[3] == None\
                     and (key[4] == Metadata['unit'] or key[4] == None or key[4] == Metadata['language']):
-                dict11[key[0] + '_prev'] = dict54[key][0]
+                dict11[get_xbrlkey(key[0], ":") + '_prev'] = dict54[key][0]
         except:
             pass
         if key in ('{http://www.xbrl.org/2003/linkbase}schemaRef',
