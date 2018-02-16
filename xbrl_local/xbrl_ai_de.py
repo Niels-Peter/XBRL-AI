@@ -110,13 +110,13 @@ def xbrl_54_to_xbrl_de_11(dict54, metadata = False):
                    '@{http://www.w3.org/2001/XMLSchema-instance}schemaLocation'):
             Metadata[key] = dict54[key]
     compscore = 0
-    if dict11.get('de-gaap-ci-2013-04-30:bs.ass', 'mis') != 'mis' or dict11.get('2010-01-31:bs.ass', 'mis') != 'mis':
+    if dict11.get('bs.ass', 'mis') != 'mis':
         compscore = compscore + 1
-    if dict11.get('de-gaap-ci-2013-04-30:bs.ass_prev', 'mis') != 'mis' or dict11.get('2010-01-31:bs.ass_prev', 'mis') != 'mis':
+    if dict11.get('bs.ass_prev', 'mis') != 'mis':
         compscore = compscore + 2
-    if dict11.get('de-gaap-ci-2013-04-30:is.netIncome', 'mis') != 'mis' or dict11.get('2010-01-31:is.netIncome', 'mis') != 'mis':
+    if dict11.get('is.netIncome', 'mis') != 'mis':
         compscore = compscore + 4
-    if dict11.get('de-gaap-ci-2013-04-30:is.netIncome_prev', 'mis') != 'mis'or dict11.get('2010-01-31:is.netIncome_prev', 'mis') != 'mis':
+    if dict11.get('is.netIncome_prev', 'mis') != 'mis':
         compscore = compscore + 8 
     Metadata['compscore'] = compscore
     return dict11
