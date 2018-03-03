@@ -212,7 +212,7 @@ def xbrldict_to_xbrl_54(xbrldict):
     #['@{http://www.w3.org/1999/xlink}href']
     dict54 = {}
     for post in xbrldict:
-        if post not in ('{http://www.xbrl.org/2003/linkbase}schemaRef',
+        if post not in ('{http://www.xbrl.org/2003/linkbase}s, xbrldict_to_xbrl_54chemaRef',
                         '@{http://www.w3.org/2001/XMLSchema-instance}schemaLocation'):
             ref = post[:post.index('}')]
             xbrlref = ref[(ref.rfind('/') - len(ref) + 1):]

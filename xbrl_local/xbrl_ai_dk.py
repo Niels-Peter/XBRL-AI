@@ -376,13 +376,16 @@ class xbrl_to_dk_11(BaseEstimator, TransformerMixin):
     def transform(self, posts):
         outputdata = []
         for indhold in posts:
-            metadata = fetchlist_dk(str(indhold[0]), (indhold[1]))
-            targeturl = metadata['dokumentUrl']
-            xbrldoc_as_dict\
-                = xbrlinstance_to_dict(requests.get(targeturl).content)
-            xbrl_as_dk_64 = xbrldict_to_xbrl_dk_64(xbrldoc_as_dict)
-            xbrl_as_dk_11 = xbrl_dk_64_to_xbrl_dk_11(xbrl_as_dk_64)
-            outputdata\
-                = np.append(outputdata, [xbrl_as_dk_11], axis=0)
+            try:
+                metadata = fetchlist_dk(str(indhold[0]), (indhold[1]))
+                targeturl = metadata['dokumentUrl']
+                xbrldoc_as_dict\
+                    = xbrlinstance_to_dict(requests.get(targeturl).content)
+                xbrl_as_dk_64 = xbrldict_to_xbrl_dk_64(xbrldoc_as_dict)
+                xbrl_as_dk_11 = xbrl_dk_64_to_xbrl_dk_11(xbrl_as_dk_64)
+                outputdata\
+                    = np.append(outputdata, [xbrl_as_dk_11], axis=0)
+            except:
+                pass
         return outputdata
     
