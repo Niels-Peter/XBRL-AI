@@ -285,11 +285,20 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
                     concept = xbrlref + ':' + get_xbrlkey(post, '}') + label_extend + label_typed
                     if type(unit).__name__ == 'NoneType':
                         unit = lang
-                    nogle = (concept, startdate, enddate, label_typed_id, koncern, unit)
-                    if nogle in dict64 and dict64[nogle][0] != value:
-                        print('!!!!!!!!!', nogle, value, unit, decimals, dict64[nogle])
                     if len(str(dimension_list)) < 5:
                         dimension_list = None
+                    
+                    nogle = (concept, startdate, enddate, label_typed_id, koncern, unit)
+                    if nogle in dict64 and dict64[nogle][0] != value:
+                        if type(unit).__name__ == 'NoneType':
+                            value = value + ' ' + dict64[nogle][0]
+                        elif unit[:7] != 'iso4217':
+                            value = value + ' ' + dict64[nogle][0]                            
+                        else:
+                            if value == 0:
+                                value = dict64[nogle][0]
+                            else:
+                                print('!!!!!!!!!', nogle, value, unit, decimals, dict64[nogle])
                     dict64[nogle] = [value, unit, decimals, dimension_list]
             if type(xbrldict[post]).__name__ == 'OrderedDict':
                 value, unit, decimals, startdate, enddate, koncern, lang, label_extend, label_typed,\
@@ -297,11 +306,21 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
                 concept = xbrlref + ':' + get_xbrlkey(post, '}') + label_extend + label_typed
                 if type(unit).__name__ == 'NoneType':
                     unit = lang
-                nogle = (concept, startdate, enddate, label_typed_id, koncern, unit)
-                if nogle in dict64 and dict64[nogle][0] != value:
-                    print('!!!!!!!!!', nogle, value, unit, decimals, dict64[nogle])
                 if len(str(dimension_list)) < 5:
                     dimension_list = None
+
+                nogle = (concept, startdate, enddate, label_typed_id, koncern, unit)
+                if nogle in dict64 and dict64[nogle][0] != value:
+                    if type(unit).__name__ == 'NoneType':
+                        value = value + ' ' + dict64[nogle][0]
+                    elif unit[:7] != 'iso4217':
+                        value = value + ' ' + dict64[nogle][0]                            
+                    else:
+                        if value == 0:
+                            value = dict64[nogle][0]
+                        else:
+                            print('!!!!!!!!!', nogle, value, unit, decimals, dict64[nogle])
+
                 dict64[nogle] = [value, unit, decimals, dimension_list]
         if post in ('{http://www.xbrl.org/2003/linkbase}schemaRef',
                     '@{http://www.w3.org/2001/XMLSchema-instance}schemaLocation'):

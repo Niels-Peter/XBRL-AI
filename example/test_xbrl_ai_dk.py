@@ -24,6 +24,7 @@ Step by step
 #linkdata = fetchlist_dk('61056416', '2015-10-31')
 #linkdata = fetchlist_dk('36714565', date='2016-12-31', reports='ALL', style='dict')
 linkdata = fetchlist_dk('11964346', '2016-08-31')
+linkdata = fetchlist_dk('33764006', '2018-02-28')
 targeturl = linkdata['dokumentUrl']
 
 # Step 2:
@@ -53,4 +54,4 @@ data_transformed = get_data.transform(input_data)
 SCAN/SCROLL from indeks
 """
 
-list_of_data = scanscroll_fetchlist_dk('2016-01-31')
+list_of_data = scanscroll_fetchlist_dk('2016-01-31', '2016-01-01')
