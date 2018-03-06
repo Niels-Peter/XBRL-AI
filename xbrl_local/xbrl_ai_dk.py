@@ -11,11 +11,13 @@ import requests
 from datetime import datetime, timedelta
 from sklearn.base import BaseEstimator, TransformerMixin
 import numpy as np
+from elasticsearch1 import Elasticsearch
+from elasticsearch1_dsl import Search
+
 from xbrl_ai import xbrlinstance_to_dict
 
-
 __title__ = 'xbrl_ai_dk'
-__version__ = '0.0.3'
+__version__ = '0.0.4'
 __author__ = 'Niels-Peter Rønmos'
 
 
@@ -108,6 +110,51 @@ def fetchlist_dk(cvrnummer, date='dd', reports='AARSRAPPORT', style='dict'):
     else:
         returnstatement = None
     return returnstatement
+
+
+def scanscroll_fetchlist_dk(slutDato, startDato='slutDato', format='publishTime'):   
+    if startDato == 'slutDato':
+        startDato = slutDato 
+    if format == 'publishTime':
+        queries =  {"query": {"range" : {"offentliggoerelsesTidspunkt" : {"gte": startDato + "T00:00:00.000", "lte": slutDato + "T23:59:59.999", "time_zone": "+1:00"}}}}
+    elif format == 'periodEndDate':
+        queries =  {"query": {"range" : {"regnskab.regnskabsperiode.slutDato" : {"gte": startDato + "T00:00:00.000", "lte": slutDato + "T23:59:59.999", "time_zone": "+1:00"}}}}
+    else:
+        return None
+    url = 'http://distribution.virk.dk:80'
+    index = 'offentliggoerelser'
+    elastic_client = Elasticsearch(url, timeout=60, max_retries=10, retry_on_timeout=True)
+    elastic_search_scan_size = 128
+    elastic_search_scroll_time = u'5m'
+    # set elastic search params
+    params = {'scroll': elastic_search_scroll_time, 'size': elastic_search_scan_size}    
+    # create elasticsearch search object
+    search = Search(using=elastic_client, index=index)
+    search.update_from_dict(queries)
+    search = search.params(**params)      
+    #print('ElasticSearch Download Scan Query: ', search.to_dict())
+    generator = search.scan()
+    generator = enumerate(generator)
+    result = []
+    for index, obj in generator:
+        post = obj.to_dict()
+        dict_post = {}
+        dict_post['_id'] = obj.meta['id']
+        dict_post['cvrNummer'] = post['cvrNummer']
+        dict_post['regNummer'] = post['regNummer']
+        dict_post['offentliggoerelsesTidspunkt'] = post['offentliggoerelsesTidspunkt']
+        dict_post['offentliggoerelsestype'] = post['offentliggoerelsestype']
+        dict_post['omgoerelse'] = post['omgoerelse']
+        dict_post['sagsNummer'] = post['sagsNummer']
+        dict_post['startDato'] = ((post['regnskab'])['regnskabsperiode'])['startDato']
+        dict_post['slutDato'] = ((post['regnskab'])['regnskabsperiode'])['slutDato']
+        dict_post['dokumentUrl'] = None
+        for dok in post['dokumenter']:
+            if dok['dokumentMimeType'] == 'application/xml':
+                dict_post['dokumentUrl'] = dok['dokumentUrl']
+                dict_post['dokumentType'] = dok['dokumentType']
+        result.append(dict_post) 
+    return result
 
 
 def xbrldict_to_xbrl_dk_64(xbrldict):
