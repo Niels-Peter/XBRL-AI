@@ -297,8 +297,8 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
                         else:
                             if value == 0:
                                 value = dict64[nogle][0]
-                            else:
-                                print('!!!!!!!!!', nogle, value, unit, decimals, dict64[nogle])
+#                            else:
+#                                print('!!!!!!!!!', nogle, value, unit, decimals, dict64[nogle])
                     dict64[nogle] = [value, unit, decimals, dimension_list]
             if type(xbrldict[post]).__name__ == 'OrderedDict':
                 value, unit, decimals, startdate, enddate, koncern, lang, label_extend, label_typed,\
@@ -318,8 +318,8 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
                     else:
                         if value == 0:
                             value = dict64[nogle][0]
-                        else:
-                            print('!!!!!!!!!', nogle, value, unit, decimals, dict64[nogle])
+#                        else:
+#                            print('!!!!!!!!!', nogle, value, unit, decimals, dict64[nogle])
 
                 dict64[nogle] = [value, unit, decimals, dimension_list]
         if post in ('{http://www.xbrl.org/2003/linkbase}schemaRef',
