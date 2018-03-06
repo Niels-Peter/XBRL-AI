@@ -292,7 +292,7 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
                     if nogle in dict64 and dict64[nogle][0] != value:
                         if type(unit).__name__ == 'NoneType':
                             value = value + ' ' + dict64[nogle][0]
-                        elif unit[:7] != 'iso4217':
+                        elif type(value).__name__ == 'str':
                             value = value + ' ' + dict64[nogle][0]                            
                         else:
                             if value == 0:
@@ -313,7 +313,7 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
                 if nogle in dict64 and dict64[nogle][0] != value:
                     if type(unit).__name__ == 'NoneType':
                         value = value + ' ' + dict64[nogle][0]
-                    elif unit[:7] != 'iso4217':
+                    elif type(value).__name__ == 'str':
                         value = value + ' ' + dict64[nogle][0]                            
                     else:
                         if value == 0:
