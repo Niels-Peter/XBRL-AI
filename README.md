@@ -49,6 +49,7 @@ Download the files and run the following command from the folder:
 >> pip install .
 ```
 
+- Using setuptools:
 ```
 >> python setup.py install
 ```
