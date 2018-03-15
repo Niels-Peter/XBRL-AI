@@ -291,7 +291,7 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
                     nogle = (concept, startdate, enddate, label_typed_id, koncern, unit)
                     if nogle in dict64 and dict64[nogle][0] != value:
                         if type(unit).__name__ == 'NoneType':
-                            value = value + ' ' + dict64[nogle][0]
+                            value = str(value) + ' ' + str(dict64[nogle][0])
                         elif type(value).__name__ == 'str':
                             value = value + ' ' + dict64[nogle][0]                            
                         else:
@@ -362,6 +362,7 @@ def xbrl_dk_64_to_xbrl_dk_11(dict64, metadata = False):
             else:
                 languages[post[5]] = languages[post[5]] + 1
     unitmax = 0
+    unit = None
     language = None
     for post in units:
         if units[post] > unitmax:
