@@ -43,6 +43,12 @@ You can now run the test_xbrl_ai_dk.py.
 ## Installation
 
 Download the files and run the following command from the folder:
+- Using pip:
+
+```
+>> pip install .
+```
+
 ```
 >> python setup.py install
 ```
