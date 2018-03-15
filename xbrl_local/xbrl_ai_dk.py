@@ -260,7 +260,8 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
         typed = context[6]
         koncern, label_extend, dimension_list_extend = explicit_list(explicit, ifrs)
         label_typed, label_typed_id, dimension_list_typed = typed_list(typed)
-        dimension_list = dimension_list_extend.append(dimension_list_typed)
+        
+        dimension_list_extend.append(dimension_list_typed)
         if label_typed_id == '':
             label_typed_id = None
         return value, unit, decimals, startdate, enddate, koncern, lang,\
@@ -361,18 +362,15 @@ def xbrl_dk_64_to_xbrl_dk_11(dict64, metadata = False):
                     languages[post[5]] = 1
             else:
                 languages[post[5]] = languages[post[5]] + 1
-    unitmax = 0
+
     unit = None
     language = None
-    for post in units:
-        if units[post] > unitmax:
-            unitmax = units[post]
-            unit = post
-    languagemax = 0
-    for post in languages:
-        if languages[post] > languagemax:
-            languagemax = languages[post]
-            language = post
+    
+    if len(units) > 0: unit = max(units.keys(), key=(lambda k: units[k]))    
+
+    if len(languages) > 0: language = max(languages.keys(), key=(lambda k: languages[k])) 
+    
+    
     Metadata = {}
     Metadata['unit'] = unit
     Metadata['language'] = language
