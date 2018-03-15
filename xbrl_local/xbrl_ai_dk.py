@@ -270,7 +270,8 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
     #schemaRef = (XBRL['{http://www.xbrl.org/2003/linkbase}schemaRef'])\
     #['@{http://www.w3.org/1999/xlink}href']
     dict64 = {}
-    if len([v for k, v in xbrldict.items() if k.startswith('{http://xbrl.ifrs.org/')]) > 0:
+    
+    if any(k.startswith('{http://xbrl.ifrs.org/') for k in xbrldict.keys()):
         ifrs = True
     else:
         ifrs = False
