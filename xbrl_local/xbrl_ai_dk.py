@@ -9,10 +9,15 @@ import time
 import collections
 import requests
 from datetime import datetime, timedelta
+from sklearn.base import BaseEstimator, TransformerMixin
+import numpy as np
+from elasticsearch1 import Elasticsearch
+from elasticsearch1_dsl import Search
 
+from xbrl_ai import xbrlinstance_to_dict
 
 __title__ = 'xbrl_ai_dk'
-__version__ = '0.0.2'
+__version__ = '0.0.4'
 __author__ = 'Niels-Peter Rønmos'
 
 
@@ -105,6 +110,51 @@ def fetchlist_dk(cvrnummer, date='dd', reports='AARSRAPPORT', style='dict'):
     else:
         returnstatement = None
     return returnstatement
+
+
+def scanscroll_fetchlist_dk(slutDato, startDato='slutDato', format='publishTime'):   
+    if startDato == 'slutDato':
+        startDato = slutDato 
+    if format == 'publishTime':
+        queries =  {"query": {"range" : {"offentliggoerelsesTidspunkt" : {"gte": startDato + "T00:00:00.000", "lte": slutDato + "T23:59:59.999", "time_zone": "+1:00"}}}}
+    elif format == 'periodEndDate':
+        queries =  {"query": {"range" : {"regnskab.regnskabsperiode.slutDato" : {"gte": startDato + "T00:00:00.000", "lte": slutDato + "T23:59:59.999", "time_zone": "+1:00"}}}}
+    else:
+        return None
+    url = 'http://distribution.virk.dk:80'
+    index = 'offentliggoerelser'
+    elastic_client = Elasticsearch(url, timeout=60, max_retries=10, retry_on_timeout=True)
+    elastic_search_scan_size = 128
+    elastic_search_scroll_time = u'5m'
+    # set elastic search params
+    params = {'scroll': elastic_search_scroll_time, 'size': elastic_search_scan_size}    
+    # create elasticsearch search object
+    search = Search(using=elastic_client, index=index)
+    search.update_from_dict(queries)
+    search = search.params(**params)      
+    #print('ElasticSearch Download Scan Query: ', search.to_dict())
+    generator = search.scan()
+    generator = enumerate(generator)
+    result = []
+    for index, obj in generator:
+        post = obj.to_dict()
+        dict_post = {}
+        dict_post['_id'] = obj.meta['id']
+        dict_post['cvrNummer'] = post['cvrNummer']
+        dict_post['regNummer'] = post['regNummer']
+        dict_post['offentliggoerelsesTidspunkt'] = post['offentliggoerelsesTidspunkt']
+        dict_post['offentliggoerelsestype'] = post['offentliggoerelsestype']
+        dict_post['omgoerelse'] = post['omgoerelse']
+        dict_post['sagsNummer'] = post['sagsNummer']
+        dict_post['startDato'] = ((post['regnskab'])['regnskabsperiode'])['startDato']
+        dict_post['slutDato'] = ((post['regnskab'])['regnskabsperiode'])['slutDato']
+        dict_post['dokumentUrl'] = None
+        for dok in post['dokumenter']:
+            if dok['dokumentMimeType'] == 'application/xml':
+                dict_post['dokumentUrl'] = dok['dokumentUrl']
+                dict_post['dokumentType'] = dok['dokumentType']
+        result.append(dict_post) 
+    return result
 
 
 def xbrldict_to_xbrl_dk_64(xbrldict):
@@ -235,11 +285,20 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
                     concept = xbrlref + ':' + get_xbrlkey(post, '}') + label_extend + label_typed
                     if type(unit).__name__ == 'NoneType':
                         unit = lang
-                    nogle = (concept, startdate, enddate, label_typed_id, koncern, unit)
-                    if nogle in dict64 and dict64[nogle][0] != value:
-                        print('!!!!!!!!!', nogle, value, unit, decimals, dict64[nogle])
                     if len(str(dimension_list)) < 5:
                         dimension_list = None
+                    
+                    nogle = (concept, startdate, enddate, label_typed_id, koncern, unit)
+                    if nogle in dict64 and dict64[nogle][0] != value:
+                        if type(unit).__name__ == 'NoneType':
+                            value = value + ' ' + dict64[nogle][0]
+                        elif type(value).__name__ == 'str':
+                            value = value + ' ' + dict64[nogle][0]                            
+                        else:
+                            if value == 0:
+                                value = dict64[nogle][0]
+#                            else:
+#                                print('!!!!!!!!!', nogle, value, unit, decimals, dict64[nogle])
                     dict64[nogle] = [value, unit, decimals, dimension_list]
             if type(xbrldict[post]).__name__ == 'OrderedDict':
                 value, unit, decimals, startdate, enddate, koncern, lang, label_extend, label_typed,\
@@ -247,12 +306,25 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
                 concept = xbrlref + ':' + get_xbrlkey(post, '}') + label_extend + label_typed
                 if type(unit).__name__ == 'NoneType':
                     unit = lang
-                nogle = (concept, startdate, enddate, label_typed_id, koncern, unit)
-                if nogle in dict64 and dict64[nogle][0] != value:
-                    print('!!!!!!!!!', nogle, value, unit, decimals, dict64[nogle])
                 if len(str(dimension_list)) < 5:
                     dimension_list = None
+
+                nogle = (concept, startdate, enddate, label_typed_id, koncern, unit)
+                if nogle in dict64 and dict64[nogle][0] != value:
+                    if type(unit).__name__ == 'NoneType':
+                        value = value + ' ' + dict64[nogle][0]
+                    elif type(value).__name__ == 'str':
+                        value = value + ' ' + dict64[nogle][0]                            
+                    else:
+                        if value == 0:
+                            value = dict64[nogle][0]
+#                        else:
+#                            print('!!!!!!!!!', nogle, value, unit, decimals, dict64[nogle])
+
                 dict64[nogle] = [value, unit, decimals, dimension_list]
+        if post in ('{http://www.xbrl.org/2003/linkbase}schemaRef',
+                    '@{http://www.w3.org/2001/XMLSchema-instance}schemaLocation'):
+            dict64[post] = xbrldict[post]
     return dict64
 
 def xbrl_dk_64_to_xbrl_dk_11(dict64, metadata = False):
@@ -291,13 +363,11 @@ def xbrl_dk_64_to_xbrl_dk_11(dict64, metadata = False):
                 languages[post[5]] = languages[post[5]] + 1
     unitmax = 0
     language = None
-    #print(languages)
     for post in units:
         if units[post] > unitmax:
             unitmax = units[post]
             unit = post
     languagemax = 0
-    #print(languages)
     for post in languages:
         if languages[post] > languagemax:
             languagemax = languages[post]
@@ -314,7 +384,8 @@ def xbrl_dk_64_to_xbrl_dk_11(dict64, metadata = False):
             = str(datetime.strptime(ReportingPeriodStartDate, '%Y-%m-%d') - timedelta(days=1))[:10]
     periodmax = 0
     for post in periods:
-        if post[1] == PredingReportingPeriodEndDate_temp and type(post[0]).__name__ != 'NoneType'\
+        if post[1] == PredingReportingPeriodEndDate_temp\
+                and type(post[0]).__name__ != 'NoneType'\
                 and periods[post] > periodmax:
             PredingReportingPeriodEndDate = PredingReportingPeriodEndDate_temp
             periodmax = periods[post]
@@ -327,13 +398,60 @@ def xbrl_dk_64_to_xbrl_dk_11(dict64, metadata = False):
     if metadata == True:
         dict11['metadata'] = Metadata
     for key in dict64:
-        if key[1] == ReportingPeriodStartDate and key[2] == ReportingPeriodEndDate and key[3] == None and key[4] == Metadata['koncern'] and (key[5] == Metadata['unit'] or key[5] == None or key[5] == Metadata['language']):
+        if key[1] == ReportingPeriodStartDate and key[2]\
+            == ReportingPeriodEndDate and key[3] == None and key[4]\
+            == Metadata['koncern']\
+            and (key[5] == Metadata['unit'] or key[5] == None or key[5] == Metadata['language']):
             dict11[key[0]] = dict64[key][0]
-        if key[1] == None and key[2] == ReportingPeriodEndDate and key[3] == None and key[4] == Metadata['koncern'] and (key[5] == Metadata['unit'] or key[5] == None or key[5] == Metadata['language']):
+        if key[1] == None and key[2] == ReportingPeriodEndDate and key[3]\
+                == None and key[4] == Metadata['koncern']\
+                and (key[5] == Metadata['unit'] or key[5] == None or key[5] == Metadata['language']):
             dict11[key[0]] = dict64[key][0]
-        if key[1] == PrecedingReportingPeriodStartDate and key[2] == PredingReportingPeriodEndDate and key[3] == None and key[4] == Metadata['koncern'] and (key[5] == Metadata['unit'] or key[5] == None or key[5] == Metadata['language']):
+        if key[1] == PrecedingReportingPeriodStartDate and key[2]\
+                == PredingReportingPeriodEndDate and key[3] == None\
+                and key[4] == Metadata['koncern']\
+                and (key[5] == Metadata['unit'] or key[5] == None or key[5] == Metadata['language']):
             dict11[key[0] + '_prev'] = dict64[key][0]
         if key[1] == None and key[2] == PredingReportingPeriodEndDate and key[3]\
-                == None and key[4] == Metadata['koncern'] and (key[5] == Metadata['unit'] or key[5] == None or key[5] == Metadata['language']):
+                == None and key[4] == Metadata['koncern']\
+                and (key[5] == Metadata['unit'] or key[5] == None or key[5] == Metadata['language']):
             dict11[key[0] + '_prev'] = dict64[key][0]
+        if key in ('{http://www.xbrl.org/2003/linkbase}schemaRef',
+                   '@{http://www.w3.org/2001/XMLSchema-instance}schemaLocation'):
+            Metadata[key] = dict64[key]
+    compscore = 0
+    if dict11.get('fsa:Assets', 'mis') != 'mis' :
+        compscore = compscore + 1
+    if dict11.get('fsa:Assets_prev', 'mis') != 'mis':
+        compscore = compscore + 2
+    if dict11.get('fsa:ProfitLoss', 'mis') != 'mis':
+        compscore = compscore + 4
+    if dict11.get('fsa:ProfitLoss_prev', 'mis') != 'mis':
+        compscore = compscore + 8 
+    Metadata['compscore'] = compscore
+
     return dict11
+
+
+class xbrl_to_dk_11(BaseEstimator, TransformerMixin):
+    """Extract features from each XBRL document for DictVectorizer etc."""
+
+    def fit(self, x, y=None):
+        return self
+
+    def transform(self, posts):
+        outputdata = []
+        for indhold in posts:
+            try:
+                metadata = fetchlist_dk(str(indhold[0]), (indhold[1]))
+                targeturl = metadata['dokumentUrl']
+                xbrldoc_as_dict\
+                    = xbrlinstance_to_dict(requests.get(targeturl).content)
+                xbrl_as_dk_64 = xbrldict_to_xbrl_dk_64(xbrldoc_as_dict)
+                xbrl_as_dk_11 = xbrl_dk_64_to_xbrl_dk_11(xbrl_as_dk_64)
+                outputdata\
+                    = np.append(outputdata, [xbrl_as_dk_11], axis=0)
+            except:
+                pass
+        return outputdata
+    
