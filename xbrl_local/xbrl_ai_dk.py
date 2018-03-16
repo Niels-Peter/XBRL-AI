@@ -168,7 +168,7 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
 
     def explicit_list(explicit, ifrs):
         explicit_liste = {}
-        dimension_list = []
+        #dimension_list = []
         label_extend = ''
         koncern = False
         if not ifrs:
@@ -206,14 +206,18 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
                         explicit_liste[get_xbrlkey(element['@dimension'], ":")]\
                             = get_xbrlkey(element['$'], ":")
         explicit_liste_od = collections.OrderedDict(sorted(explicit_liste.items()))
-        for keys in explicit_liste_od:
-            label_extend = label_extend + '_' + explicit_liste_od[keys]
-            dimension_list.append(keys)
+        #for keys in explicit_liste_od:
+            #label_extend = label_extend + '_' + explicit_liste_od[keys]
+            #dimension_list.append(keys)
+        #print(type(explicit_liste_od))
+        label_extend = ''.join('_' + explicit_liste_od[keys] for keys in explicit_liste_od)
+        dimension_list = [keys for keys in explicit_liste_od]
+
         return koncern, label_extend, dimension_list
 
     def typed_list(typed):
         typed_liste = {}
-        dimension_list = []
+        #dimension_list = []
         label_typed = label_typed_id = ''
         if type(typed).__name__ == 'OrderedDict':
             for poster in typed:
@@ -233,13 +237,18 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
                         member = get_xbrlkey(poster, "}")
                 typed_liste[dimension, vaerdi] = member
         typed_liste_od = collections.OrderedDict(sorted(typed_liste.items()))
-        for keys in typed_liste_od:
-            dimension_list.append(keys[0])
-            label_typed = label_typed + '_' + typed_liste_od[keys]
-            if label_typed_id == '':
-                label_typed_id = str(keys[1])
-            else:
-                label_typed_id = label_typed_id + '|' + str(keys[1])
+        #for keys in typed_liste_od:
+            #dimension_list.append(keys[0])
+            #label_typed = label_typed + '_' + typed_liste_od[keys]
+            #if label_typed_id == '':
+            #    label_typed_id = str(keys[1])
+            #else:
+            #    label_typed_id = label_typed_id + '|' + str(keys[1])
+        
+        label_typed = "".join('_' + typed_liste_od[keys] for keys in typed_liste_od)
+        label_typed_id = '|'.join(str(keys[1]) for keys in typed_liste_od)
+        dimension_list = [keys[0] for keys in typed_liste_od]
+        
         return label_typed, label_typed_id, dimension_list
 
     def concept_data(inputdata, ifrs):
