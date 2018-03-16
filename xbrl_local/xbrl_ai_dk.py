@@ -180,7 +180,7 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
                 else:
                     explicit_liste[get_xbrlkey(explicit['@dimension'], ":")]\
                         = get_xbrlkey(explicit['$'], ":")
-            if type(explicit).__name__ == 'list':
+            if isinstance(explicit, list):
                 for element in explicit:
                     if get_xbrlkey(element['@dimension'], ":")\
                             == 'ConsolidatedSoloDimension':
@@ -197,7 +197,7 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
                 else:
                     explicit_liste[get_xbrlkey(explicit['@dimension'], ":")]\
                         = get_xbrlkey(explicit['$'], ":")
-            if type(explicit).__name__ == 'list':
+            if isinstance(explicit, list):
                 for element in explicit:
                     if get_xbrlkey(element['@dimension'], ":")\
                             == 'ConsolidatedAndSeparateFinancialStatementsAxis':
@@ -223,7 +223,7 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
                     vaerdi = (typed[poster]).get('$', None)
                     member = get_xbrlkey(poster, "}")
             typed_liste[dimension, vaerdi] = member
-        if type(typed).__name__ == 'list':
+        elif isinstance(typed, list):
             for element in typed:
                 for poster in element:
                     if poster == '@dimension':
@@ -248,13 +248,13 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
         decimals = inputdata.get('@decimals', None)
         context = inputdata['context']
         lang = inputdata.get('@{http://www.w3.org/XML/1998/namespace}lang', None)
-        if type(lang).__name__ != 'NoneType':
+        if lang is not None:
             lang = 'lang:' + lang
         # identificer = context[0]
         startdate = context[2]
         enddate = context[3]
         instant = context[4]
-        if type(enddate).__name__ != 'str':
+        if not isinstance(enddate, str):
             enddate = instant
         explicit = context[5]
         typed = context[6]
@@ -273,6 +273,7 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
     
     if any(k.startswith('{http://xbrl.ifrs.org/') for k in xbrldict.keys()):
         ifrs = True
+
     else:
         ifrs = False
     for post in xbrldict:
@@ -280,19 +281,19 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
                         '@{http://www.w3.org/2001/XMLSchema-instance}schemaLocation'):
             ref = post[:post.index('}')]
             xbrlref = ref[(ref.rfind('/') - len(ref) + 1):]
-            if type(xbrldict[post]).__name__ == 'list':
+            if isinstance(xbrldict[post], list):
                 for element in xbrldict[post]:
                     value, unit, decimals, startdate, enddate, koncern, lang, label_extend,\
                         label_typed, label_typed_id, dimension_list = concept_data(element, ifrs)
                     concept = xbrlref + ':' + get_xbrlkey(post, '}') + label_extend + label_typed
-                    if type(unit).__name__ == 'NoneType':
+                    if unit is None:
                         unit = lang
                     if len(str(dimension_list)) < 5:
                         dimension_list = None
                     
                     nogle = (concept, startdate, enddate, label_typed_id, koncern, unit)
                     if nogle in dict64 and dict64[nogle][0] != value:
-                        if type(unit).__name__ == 'NoneType':
+                        if unit is None:
                             value = str(value) + ' ' + str(dict64[nogle][0])
                         elif type(value).__name__ == 'str':
                             value = value + ' ' + dict64[nogle][0]                            
@@ -306,16 +307,16 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
                 value, unit, decimals, startdate, enddate, koncern, lang, label_extend, label_typed,\
                     label_typed_id, dimension_list = concept_data(xbrldict[post], ifrs)
                 concept = xbrlref + ':' + get_xbrlkey(post, '}') + label_extend + label_typed
-                if type(unit).__name__ == 'NoneType':
+                if unit is None:
                     unit = lang
                 if len(str(dimension_list)) < 5:
                     dimension_list = None
 
                 nogle = (concept, startdate, enddate, label_typed_id, koncern, unit)
                 if nogle in dict64 and dict64[nogle][0] != value:
-                    if type(unit).__name__ == 'NoneType':
+                    if unit is None:
                         value = value + ' ' + dict64[nogle][0]
-                    elif type(value).__name__ == 'str':
+                    elif isinstance(value, str):
                         value = value + ' ' + dict64[nogle][0]                            
                     else:
                         if value == 0:
@@ -348,7 +349,7 @@ def xbrl_dk_64_to_xbrl_dk_11(dict64, metadata = False):
             PredingReportingPeriodEndDate = (dict64[post])[0]
         if post[4] is True:
             koncern = True
-        if type(post[5]).__name__ != 'NoneType':
+        if post[5] is not None:
             if (post[1], post[2]) not in periods:
                 periods[post[1], post[2]] = 1
             else:
@@ -385,7 +386,7 @@ def xbrl_dk_64_to_xbrl_dk_11(dict64, metadata = False):
     periodmax = 0
     for post in periods:
         if post[1] == PredingReportingPeriodEndDate_temp\
-                and type(post[0]).__name__ != 'NoneType'\
+                and post[0] is not None\
                 and periods[post] > periodmax:
             PredingReportingPeriodEndDate = PredingReportingPeriodEndDate_temp
             periodmax = periods[post]
@@ -395,26 +396,26 @@ def xbrl_dk_64_to_xbrl_dk_11(dict64, metadata = False):
     Metadata['PredingReportingPeriodEndDate'] = PredingReportingPeriodEndDate
     
     dict11 = {}
-    if metadata == True:
+    if metadata:
         dict11['metadata'] = Metadata
     for key in dict64:
         if key[1] == ReportingPeriodStartDate and key[2]\
-            == ReportingPeriodEndDate and key[3] == None and key[4]\
+            == ReportingPeriodEndDate and key[3] is None and key[4]\
             == Metadata['koncern']\
-            and (key[5] == Metadata['unit'] or key[5] == None or key[5] == Metadata['language']):
+            and (key[5] == Metadata['unit'] or key[5] is None or key[5] == Metadata['language']):
             dict11[key[0]] = dict64[key][0]
-        if key[1] == None and key[2] == ReportingPeriodEndDate and key[3]\
-                == None and key[4] == Metadata['koncern']\
-                and (key[5] == Metadata['unit'] or key[5] == None or key[5] == Metadata['language']):
+        if key[1] is None and key[2] == ReportingPeriodEndDate and key[3]\
+                is None and key[4] == Metadata['koncern']\
+                and (key[5] == Metadata['unit'] or key[5] is None or key[5] == Metadata['language']):
             dict11[key[0]] = dict64[key][0]
         if key[1] == PrecedingReportingPeriodStartDate and key[2]\
-                == PredingReportingPeriodEndDate and key[3] == None\
+                == PredingReportingPeriodEndDate and key[3] is None\
                 and key[4] == Metadata['koncern']\
-                and (key[5] == Metadata['unit'] or key[5] == None or key[5] == Metadata['language']):
+                and (key[5] == Metadata['unit'] or key[5] is None or key[5] == Metadata['language']):
             dict11[key[0] + '_prev'] = dict64[key][0]
-        if key[1] == None and key[2] == PredingReportingPeriodEndDate and key[3]\
-                == None and key[4] == Metadata['koncern']\
-                and (key[5] == Metadata['unit'] or key[5] == None or key[5] == Metadata['language']):
+        if key[1] is None and key[2] == PredingReportingPeriodEndDate and key[3]\
+                is None and key[4] == Metadata['koncern']\
+                and (key[5] == Metadata['unit'] or key[5] is None or key[5] == Metadata['language']):
             dict11[key[0] + '_prev'] = dict64[key][0]
         if key in ('{http://www.xbrl.org/2003/linkbase}schemaRef',
                    '@{http://www.w3.org/2001/XMLSchema-instance}schemaLocation'):

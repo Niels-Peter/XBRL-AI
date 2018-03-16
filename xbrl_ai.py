@@ -12,10 +12,8 @@ __author__ = 'Niels-Peter Rønmos'
 
 from xml.etree.ElementTree import fromstring
 from xmljson import badgerfish as bf
-import time
 import collections
-import requests
-from datetime import datetime, timedelta
+
 
 
 def xbrlinstance_to_dict(xbrlinstance):
@@ -27,7 +25,7 @@ def xbrlinstance_to_dict(xbrlinstance):
     # Extract unit information
     unitlist = {}
     unit = xbrldict['{http://www.xbrl.org/2003/instance}unit']
-    if type(unit).__name__ == 'list':
+    if isinstance(unit, list):
         for post in unit:
             try:
                 unitlist[post['@id']] = (post['{http://www.xbrl.org/2003/instance}measure'])['$']
@@ -39,14 +37,14 @@ def xbrlinstance_to_dict(xbrlinstance):
                     + ((divide['{http://www.xbrl.org/2003/instance}unitDenominator'])['{http://www.xbrl.org/2003/instance}measure'])['$']
             except LookupError:
                 pass                           
-    if type(unit).__name__ == 'OrderedDict':
+    elif type(unit).__name__ == 'OrderedDict':
         try:
             unitlist[unit['@id']] = (unit['{http://www.xbrl.org/2003/instance}measure'])['$']
         except LookupError:
             pass               
         try:
             divide = unit['{http://www.xbrl.org/2003/instance}divide']
-            unitlist[inut['@id']] = ((divide['{http://www.xbrl.org/2003/instance}unitNumerator'])['{http://www.xbrl.org/2003/instance}measure'])['$'] + '/'\
+            unitlist[unit['@id']] = ((divide['{http://www.xbrl.org/2003/instance}unitNumerator'])['{http://www.xbrl.org/2003/instance}measure'])['$'] + '/'\
                 + ((divide['{http://www.xbrl.org/2003/instance}unitDenominator'])['{http://www.xbrl.org/2003/instance}measure'])['$']
         except LookupError:
                 pass
@@ -117,7 +115,7 @@ def xbrlinstance_to_dict(xbrlinstance):
                     = unitlist[(xbrldict[concept])['@unitRef']]
             except LookupError:
                 pass
-        if type(xbrldict[concept]).__name__ == 'list':
+        if isinstance(xbrldict[concept], list):
             for i in range(0, len(xbrldict[concept])):
                 try:
                     ((xbrldict[concept])[i])['context']\
@@ -144,7 +142,7 @@ def xbrldict_to_xbrl_54(xbrldict):
         if type(explicit).__name__ == 'OrderedDict':
             explicit_liste[get_xbrlkey(explicit['@dimension'], ":")]\
                 = get_xbrlkey(explicit['$'], ":")
-        if type(explicit).__name__ == 'list':
+        if isinstance(explicit, list):
             for element in explicit:
                 explicit_liste[get_xbrlkey(element['@dimension'], ":")]\
                     = get_xbrlkey(element['$'], ":")        
@@ -208,6 +206,7 @@ def xbrldict_to_xbrl_54(xbrldict):
         return value, unit, decimals, startdate, enddate, lang,\
             label_extend, label_typed, label_typed_id, dimension_list_extend
 
+    
     #schemaRef = (XBRL['{http://www.xbrl.org/2003/linkbase}schemaRef'])\
     #['@{http://www.w3.org/1999/xlink}href']
     dict54 = {}
