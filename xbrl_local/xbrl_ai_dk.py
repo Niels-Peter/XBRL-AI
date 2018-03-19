@@ -173,14 +173,14 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
         koncern = False
         if not ifrs:
             koncern = False
-            if type(explicit).__name__ == 'OrderedDict':
+            if isinstance(explicit, dict):
                 if get_xbrlkey(explicit['@dimension'], ":")\
                         == 'ConsolidatedSoloDimension':
                     koncern = True
                 else:
                     explicit_liste[get_xbrlkey(explicit['@dimension'], ":")]\
                         = get_xbrlkey(explicit['$'], ":")
-            if isinstance(explicit, list):
+            elif isinstance(explicit, list):
                 for element in explicit:
                     if get_xbrlkey(element['@dimension'], ":")\
                             == 'ConsolidatedSoloDimension':
@@ -190,14 +190,14 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
                             = get_xbrlkey(element['$'], ":")
         else:
             koncern = True
-            if type(explicit).__name__ == 'OrderedDict':
+            if isinstance(explicit, dict):
                 if get_xbrlkey(explicit['@dimension'], ":")\
                     == 'ConsolidatedAndSeparateFinancialStatementsAxis':
                         koncern = False
                 else:
                     explicit_liste[get_xbrlkey(explicit['@dimension'], ":")]\
                         = get_xbrlkey(explicit['$'], ":")
-            if isinstance(explicit, list):
+            elif isinstance(explicit, list):
                 for element in explicit:
                     if get_xbrlkey(element['@dimension'], ":")\
                             == 'ConsolidatedAndSeparateFinancialStatementsAxis':
@@ -209,21 +209,23 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
         #for keys in explicit_liste_od:
             #label_extend = label_extend + '_' + explicit_liste_od[keys]
             #dimension_list.append(keys)
-        #print(type(explicit_liste_od))
-        label_extend = ''.join('_' + explicit_liste_od[keys] for keys in explicit_liste_od)
-        dimension_list = [keys for keys in explicit_liste_od]
 
+        label_extend = ''.join('_' + explicit_liste_od[keys] for keys in explicit_liste_od)
+        dimension_list = list(explicit_liste_od.keys())
+        #print(dimension_list)
+        #dimension_list = [keys for keys in explicit_liste_od]
+        #print(dimension_list)
         return koncern, label_extend, dimension_list
 
     def typed_list(typed):
         typed_liste = {}
         #dimension_list = []
         label_typed = label_typed_id = ''
-        if type(typed).__name__ == 'OrderedDict':
+        if isinstance(typed, dict):
             for poster in typed:
                 if poster == '@dimension':
                     dimension = get_xbrlkey(typed['@dimension'], ":")
-                if poster != '@dimension':
+                else:
                     vaerdi = (typed[poster]).get('$', None)
                     member = get_xbrlkey(poster, "}")
             typed_liste[dimension, vaerdi] = member
@@ -232,7 +234,7 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
                 for poster in element:
                     if poster == '@dimension':
                         dimension = get_xbrlkey(element['@dimension'], ":")
-                    if poster != '@dimension':
+                    else:
                         vaerdi = (element[poster]).get('$', None)
                         member = get_xbrlkey(poster, "}")
                 typed_liste[dimension, vaerdi] = member
@@ -304,7 +306,7 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
                     if nogle in dict64 and dict64[nogle][0] != value:
                         if unit is None:
                             value = str(value) + ' ' + str(dict64[nogle][0])
-                        elif type(value).__name__ == 'str':
+                        elif isinstance(value, str):
                             value = value + ' ' + dict64[nogle][0]                            
                         else:
                             if value == 0:
@@ -312,7 +314,7 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
 #                            else:
 #                                print('!!!!!!!!!', nogle, value, unit, decimals, dict64[nogle])
                     dict64[nogle] = [value, unit, decimals, dimension_list]
-            if type(xbrldict[post]).__name__ == 'OrderedDict':
+            if isinstance(xbrldict[post], dict):
                 value, unit, decimals, startdate, enddate, koncern, lang, label_extend, label_typed,\
                     label_typed_id, dimension_list = concept_data(xbrldict[post], ifrs)
                 concept = xbrlref + ':' + get_xbrlkey(post, '}') + label_extend + label_typed

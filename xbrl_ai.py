@@ -37,7 +37,7 @@ def xbrlinstance_to_dict(xbrlinstance):
                     + ((divide['{http://www.xbrl.org/2003/instance}unitDenominator'])['{http://www.xbrl.org/2003/instance}measure'])['$']
             except LookupError:
                 pass                           
-    elif type(unit).__name__ == 'OrderedDict':
+    elif isinstance(unit, dict):
         try:
             unitlist[unit['@id']] = (unit['{http://www.xbrl.org/2003/instance}measure'])['$']
         except LookupError:
@@ -104,7 +104,7 @@ def xbrlinstance_to_dict(xbrlinstance):
         del xbrldict[opryd]
     # Add unit and context infdromation on concepts
     for concept in xbrldict:
-        if type(xbrldict[concept]).__name__ == 'OrderedDict':
+        if isinstance(xbrldict[concept], dict):
             try:
                 (xbrldict[concept])['context']\
                     = contextlist[(xbrldict[concept])['@contextRef']]
