@@ -168,19 +168,19 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
 
     def explicit_list(explicit, ifrs):
         explicit_liste = {}
-        dimension_list = []
+        #dimension_list = []
         label_extend = ''
         koncern = False
         if not ifrs:
             koncern = False
-            if type(explicit).__name__ == 'OrderedDict':
+            if isinstance(explicit, dict):
                 if get_xbrlkey(explicit['@dimension'], ":")\
                         == 'ConsolidatedSoloDimension':
                     koncern = True
                 else:
                     explicit_liste[get_xbrlkey(explicit['@dimension'], ":")]\
                         = get_xbrlkey(explicit['$'], ":")
-            if type(explicit).__name__ == 'list':
+            elif isinstance(explicit, list):
                 for element in explicit:
                     if get_xbrlkey(element['@dimension'], ":")\
                             == 'ConsolidatedSoloDimension':
@@ -190,14 +190,14 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
                             = get_xbrlkey(element['$'], ":")
         else:
             koncern = True
-            if type(explicit).__name__ == 'OrderedDict':
+            if isinstance(explicit, dict):
                 if get_xbrlkey(explicit['@dimension'], ":")\
                     == 'ConsolidatedAndSeparateFinancialStatementsAxis':
                         koncern = False
                 else:
                     explicit_liste[get_xbrlkey(explicit['@dimension'], ":")]\
                         = get_xbrlkey(explicit['$'], ":")
-            if type(explicit).__name__ == 'list':
+            elif isinstance(explicit, list):
                 for element in explicit:
                     if get_xbrlkey(element['@dimension'], ":")\
                             == 'ConsolidatedAndSeparateFinancialStatementsAxis':
@@ -206,40 +206,51 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
                         explicit_liste[get_xbrlkey(element['@dimension'], ":")]\
                             = get_xbrlkey(element['$'], ":")
         explicit_liste_od = collections.OrderedDict(sorted(explicit_liste.items()))
-        for keys in explicit_liste_od:
-            label_extend = label_extend + '_' + explicit_liste_od[keys]
-            dimension_list.append(keys)
+        #for keys in explicit_liste_od:
+            #label_extend = label_extend + '_' + explicit_liste_od[keys]
+            #dimension_list.append(keys)
+
+        label_extend = ''.join('_' + explicit_liste_od[keys] for keys in explicit_liste_od)
+        dimension_list = list(explicit_liste_od.keys())
+        #print(dimension_list)
+        #dimension_list = [keys for keys in explicit_liste_od]
+        #print(dimension_list)
         return koncern, label_extend, dimension_list
 
     def typed_list(typed):
         typed_liste = {}
-        dimension_list = []
+        #dimension_list = []
         label_typed = label_typed_id = ''
-        if type(typed).__name__ == 'OrderedDict':
+        if isinstance(typed, dict):
             for poster in typed:
                 if poster == '@dimension':
                     dimension = get_xbrlkey(typed['@dimension'], ":")
-                if poster != '@dimension':
+                else:
                     vaerdi = (typed[poster]).get('$', None)
                     member = get_xbrlkey(poster, "}")
             typed_liste[dimension, vaerdi] = member
-        if type(typed).__name__ == 'list':
+        elif isinstance(typed, list):
             for element in typed:
                 for poster in element:
                     if poster == '@dimension':
                         dimension = get_xbrlkey(element['@dimension'], ":")
-                    if poster != '@dimension':
+                    else:
                         vaerdi = (element[poster]).get('$', None)
                         member = get_xbrlkey(poster, "}")
                 typed_liste[dimension, vaerdi] = member
         typed_liste_od = collections.OrderedDict(sorted(typed_liste.items()))
-        for keys in typed_liste_od:
-            dimension_list.append(keys[0])
-            label_typed = label_typed + '_' + typed_liste_od[keys]
-            if label_typed_id == '':
-                label_typed_id = str(keys[1])
-            else:
-                label_typed_id = label_typed_id + '|' + str(keys[1])
+        #for keys in typed_liste_od:
+            #dimension_list.append(keys[0])
+            #label_typed = label_typed + '_' + typed_liste_od[keys]
+            #if label_typed_id == '':
+            #    label_typed_id = str(keys[1])
+            #else:
+            #    label_typed_id = label_typed_id + '|' + str(keys[1])
+        
+        label_typed = "".join('_' + typed_liste_od[keys] for keys in typed_liste_od)
+        label_typed_id = '|'.join(str(keys[1]) for keys in typed_liste_od)
+        dimension_list = [keys[0] for keys in typed_liste_od]
+        
         return label_typed, label_typed_id, dimension_list
 
     def concept_data(inputdata, ifrs):
@@ -248,19 +259,20 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
         decimals = inputdata.get('@decimals', None)
         context = inputdata['context']
         lang = inputdata.get('@{http://www.w3.org/XML/1998/namespace}lang', None)
-        if type(lang).__name__ != 'NoneType':
+        if lang is not None:
             lang = 'lang:' + lang
         # identificer = context[0]
         startdate = context[2]
         enddate = context[3]
         instant = context[4]
-        if type(enddate).__name__ != 'str':
+        if not isinstance(enddate, str):
             enddate = instant
         explicit = context[5]
         typed = context[6]
         koncern, label_extend, dimension_list_extend = explicit_list(explicit, ifrs)
         label_typed, label_typed_id, dimension_list_typed = typed_list(typed)
-        dimension_list = dimension_list_extend.append(dimension_list_typed)
+        
+        dimension_list_extend.append(dimension_list_typed)
         if label_typed_id == '':
             label_typed_id = None
         return value, unit, decimals, startdate, enddate, koncern, lang,\
@@ -269,8 +281,10 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
     #schemaRef = (XBRL['{http://www.xbrl.org/2003/linkbase}schemaRef'])\
     #['@{http://www.w3.org/1999/xlink}href']
     dict64 = {}
-    if len([v for k, v in xbrldict.items() if k.startswith('{http://xbrl.ifrs.org/')]) > 0:
+    
+    if any(k.startswith('{http://xbrl.ifrs.org/') for k in xbrldict.keys()):
         ifrs = True
+
     else:
         ifrs = False
     for post in xbrldict:
@@ -278,21 +292,21 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
                         '@{http://www.w3.org/2001/XMLSchema-instance}schemaLocation'):
             ref = post[:post.index('}')]
             xbrlref = ref[(ref.rfind('/') - len(ref) + 1):]
-            if type(xbrldict[post]).__name__ == 'list':
+            if isinstance(xbrldict[post], list):
                 for element in xbrldict[post]:
                     value, unit, decimals, startdate, enddate, koncern, lang, label_extend,\
                         label_typed, label_typed_id, dimension_list = concept_data(element, ifrs)
                     concept = xbrlref + ':' + get_xbrlkey(post, '}') + label_extend + label_typed
-                    if type(unit).__name__ == 'NoneType':
+                    if unit is None:
                         unit = lang
                     if len(str(dimension_list)) < 5:
                         dimension_list = None
                     
                     nogle = (concept, startdate, enddate, label_typed_id, koncern, unit)
                     if nogle in dict64 and dict64[nogle][0] != value:
-                        if type(unit).__name__ == 'NoneType':
+                        if unit is None:
                             value = str(value) + ' ' + str(dict64[nogle][0])
-                        elif type(value).__name__ == 'str':
+                        elif isinstance(value, str):
                             value = value + ' ' + dict64[nogle][0]                            
                         else:
                             if value == 0:
@@ -300,20 +314,20 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
 #                            else:
 #                                print('!!!!!!!!!', nogle, value, unit, decimals, dict64[nogle])
                     dict64[nogle] = [value, unit, decimals, dimension_list]
-            if type(xbrldict[post]).__name__ == 'OrderedDict':
+            if isinstance(xbrldict[post], dict):
                 value, unit, decimals, startdate, enddate, koncern, lang, label_extend, label_typed,\
                     label_typed_id, dimension_list = concept_data(xbrldict[post], ifrs)
                 concept = xbrlref + ':' + get_xbrlkey(post, '}') + label_extend + label_typed
-                if type(unit).__name__ == 'NoneType':
+                if unit is None:
                     unit = lang
                 if len(str(dimension_list)) < 5:
                     dimension_list = None
 
                 nogle = (concept, startdate, enddate, label_typed_id, koncern, unit)
                 if nogle in dict64 and dict64[nogle][0] != value:
-                    if type(unit).__name__ == 'NoneType':
+                    if unit is None:
                         value = value + ' ' + dict64[nogle][0]
-                    elif type(value).__name__ == 'str':
+                    elif isinstance(value, str):
                         value = value + ' ' + dict64[nogle][0]                            
                     else:
                         if value == 0:
@@ -346,7 +360,7 @@ def xbrl_dk_64_to_xbrl_dk_11(dict64, metadata = False):
             PredingReportingPeriodEndDate = (dict64[post])[0]
         if post[4] is True:
             koncern = True
-        if type(post[5]).__name__ != 'NoneType':
+        if post[5] is not None:
             if (post[1], post[2]) not in periods:
                 periods[post[1], post[2]] = 1
             else:
@@ -361,18 +375,15 @@ def xbrl_dk_64_to_xbrl_dk_11(dict64, metadata = False):
                     languages[post[5]] = 1
             else:
                 languages[post[5]] = languages[post[5]] + 1
-    unitmax = 0
+
     unit = None
     language = None
-    for post in units:
-        if units[post] > unitmax:
-            unitmax = units[post]
-            unit = post
-    languagemax = 0
-    for post in languages:
-        if languages[post] > languagemax:
-            languagemax = languages[post]
-            language = post
+    
+    if len(units) > 0: unit = max(units.keys(), key=(lambda k: units[k]))    
+
+    if len(languages) > 0: language = max(languages.keys(), key=(lambda k: languages[k])) 
+    
+    
     Metadata = {}
     Metadata['unit'] = unit
     Metadata['language'] = language
@@ -386,7 +397,7 @@ def xbrl_dk_64_to_xbrl_dk_11(dict64, metadata = False):
     periodmax = 0
     for post in periods:
         if post[1] == PredingReportingPeriodEndDate_temp\
-                and type(post[0]).__name__ != 'NoneType'\
+                and post[0] is not None\
                 and periods[post] > periodmax:
             PredingReportingPeriodEndDate = PredingReportingPeriodEndDate_temp
             periodmax = periods[post]
@@ -396,26 +407,26 @@ def xbrl_dk_64_to_xbrl_dk_11(dict64, metadata = False):
     Metadata['PredingReportingPeriodEndDate'] = PredingReportingPeriodEndDate
     
     dict11 = {}
-    if metadata == True:
+    if metadata:
         dict11['metadata'] = Metadata
     for key in dict64:
         if key[1] == ReportingPeriodStartDate and key[2]\
-            == ReportingPeriodEndDate and key[3] == None and key[4]\
+            == ReportingPeriodEndDate and key[3] is None and key[4]\
             == Metadata['koncern']\
-            and (key[5] == Metadata['unit'] or key[5] == None or key[5] == Metadata['language']):
+            and (key[5] == Metadata['unit'] or key[5] is None or key[5] == Metadata['language']):
             dict11[key[0]] = dict64[key][0]
-        if key[1] == None and key[2] == ReportingPeriodEndDate and key[3]\
-                == None and key[4] == Metadata['koncern']\
-                and (key[5] == Metadata['unit'] or key[5] == None or key[5] == Metadata['language']):
+        if key[1] is None and key[2] == ReportingPeriodEndDate and key[3]\
+                is None and key[4] == Metadata['koncern']\
+                and (key[5] == Metadata['unit'] or key[5] is None or key[5] == Metadata['language']):
             dict11[key[0]] = dict64[key][0]
         if key[1] == PrecedingReportingPeriodStartDate and key[2]\
-                == PredingReportingPeriodEndDate and key[3] == None\
+                == PredingReportingPeriodEndDate and key[3] is None\
                 and key[4] == Metadata['koncern']\
-                and (key[5] == Metadata['unit'] or key[5] == None or key[5] == Metadata['language']):
+                and (key[5] == Metadata['unit'] or key[5] is None or key[5] == Metadata['language']):
             dict11[key[0] + '_prev'] = dict64[key][0]
-        if key[1] == None and key[2] == PredingReportingPeriodEndDate and key[3]\
-                == None and key[4] == Metadata['koncern']\
-                and (key[5] == Metadata['unit'] or key[5] == None or key[5] == Metadata['language']):
+        if key[1] is None and key[2] == PredingReportingPeriodEndDate and key[3]\
+                is None and key[4] == Metadata['koncern']\
+                and (key[5] == Metadata['unit'] or key[5] is None or key[5] == Metadata['language']):
             dict11[key[0] + '_prev'] = dict64[key][0]
         if key in ('{http://www.xbrl.org/2003/linkbase}schemaRef',
                    '@{http://www.w3.org/2001/XMLSchema-instance}schemaLocation'):
