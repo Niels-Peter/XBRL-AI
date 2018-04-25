@@ -392,8 +392,11 @@ def xbrl_dk_64_to_xbrl_dk_11(dict64, metadata = False):
     Metadata['ReportingPeriodStartDate'] = ReportingPeriodStartDate
     if PrecedingReportingPeriodStartDate is None or\
             PredingReportingPeriodEndDate is None:
-        PredingReportingPeriodEndDate_temp\
-            = str(datetime.strptime(ReportingPeriodStartDate, '%Y-%m-%d') - timedelta(days=1))[:10]
+        try:
+            PredingReportingPeriodEndDate_temp\
+                = str(datetime.strptime(ReportingPeriodStartDate, '%Y-%m-%d') - timedelta(days=1))[:10]
+        except:
+            PredingReportingPeriodEndDate_temp = '4711-11-11'
     periodmax = 0
     for post in periods:
         if post[1] == PredingReportingPeriodEndDate_temp\
