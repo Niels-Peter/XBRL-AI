@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?><xbrli:xbrl xmlns:xbrli="http://www.xbrl.org/2003/instance" xmlns:link="http://www.xbrl.org/2003/linkbase" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:pfs-vl="http://www.nbb.be/be/fr/pfs/ci/vl/2015-04-01" xmlns:pfs-gcd="http://www.nbb.be/be/fr/pfs/ci/gcd/2015-04-01" xmlns:pfs="http://www.nbb.be/be/fr/pfs/ci/2015-04-01" xmlns:iso4217="http://www.xbrl.org/2003/iso4217">
+  <link:schemaRef xlink:type="simple" xlink:arcrole="http://www.w3.org/1999/xlink/properties/linkbase" xlink:href="http://www.nbb.be/be/fr/pfs/ci/abbreviated/pfs-abbr-2015-04-01.xsd"/>
+  <xbrli:context id="CurrentInstant">
+    <xbrli:entity>
+      <xbrli:identifier scheme="http://www.fgov.be">BE0867379938</xbrli:identifier>
+    </xbrli:entity>
+    <xbrli:period>
+      <xbrli:instant>2016-06-30</xbrli:instant>
+    </xbrli:period>
+  </xbrli:context>
+  <xbrli:context id="CurrentDuration">
+    <xbrli:entity>
+      <xbrli:identifier scheme="http://www.fgov.be">BE0867379938</xbrli:identifier>
+    </xbrli:entity>
+    <xbrli:period>
+      <xbrli:startDate>2015-07-01</xbrli:startDate>
+      <xbrli:endDate>2016-06-30</xbrli:endDate>
+    </xbrli:period>
+  </xbrli:context>
+  <xbrli:context id="PrecedingInstant">
+    <xbrli:entity>
+      <xbrli:identifier scheme="http://www.fgov.be">BE0867379938</xbrli:identifier>
+    </xbrli:entity>
+    <xbrli:period>
+      <xbrli:instant>2015-06-30</xbrli:instant>
+    </xbrli:period>
+  </xbrli:context>
+  <xbrli:context id="N-2Instant">
+    <xbrli:entity>
+      <xbrli:identifier scheme="http://www.fgov.be">BE0867379938</xbrli:identifier>
+    </xbrli:entity>
+    <xbrli:period>
+      <xbrli:instant>2014-06-30</xbrli:instant>
+    </xbrli:period>
+  </xbrli:context>
+  <xbrli:context id="PrecedingDuration">
+    <xbrli:entity>
+      <xbrli:identifier scheme="http://www.fgov.be">BE0867379938</xbrli:identifier>
+    </xbrli:entity>
+    <xbrli:period>
+      <xbrli:startDate>2014-07-01</xbrli:startDate>
+      <xbrli:endDate>2015-06-30</xbrli:endDate>
+    </xbrli:period>
+  </xbrli:context>
+  <xbrli:unit id="U-Shares">
+    <xbrli:measure>xbrli:shares</xbrli:measure>
+  </xbrli:unit>
+  <xbrli:unit id="EUR">
+    <xbrli:measure>iso4217:EUR</xbrli:measure>
+  </xbrli:unit>
+  <pfs-gcd:EntityInformation>
+    <pfs-gcd:EntityName>
+      <pfs-gcd:EntityCurrentLegalName contextRef="CurrentDuration">ANTOINE WOUTERS</pfs-gcd:EntityCurrentLegalName>
+    </pfs-gcd:EntityName>
+    <pfs-gcd:EntityIdentifier>
+      <pfs-gcd:IdentifierName contextRef="CurrentDuration">Ondernemingsnummer</pfs-gcd:IdentifierName>
+      <pfs-gcd:IdentifierValue contextRef="CurrentDuration">BE0867379938</pfs-gcd:IdentifierValue>
+    </pfs-gcd:EntityIdentifier>
+    <pfs-gcd:EntityForm>
+      <pfs-vl:XCode_LegalFormCode_015 contextRef="CurrentDuration">015</pfs-vl:XCode_LegalFormCode_015>
+    </pfs-gcd:EntityForm>
+    <pfs-gcd:EntityAddress>
+      <pfs-gcd:AddressType>
+        <pfs-vl:XCode_AddressTypeCode_001 contextRef="CurrentDuration">001</pfs-vl:XCode_AddressTypeCode_001>
+      </pfs-gcd:AddressType>
+      <pfs-gcd:Street contextRef="CurrentDuration">DEUSTERSTRAAT</pfs-gcd:Street>
+      <pfs-gcd:Number contextRef="CurrentDuration">34</pfs-gcd:Number>
+      <pfs-gcd:PostalCodeCity>
+        <pfs-vl:XCode_PostalCode_3990 contextRef="CurrentDuration">3990</pfs-vl:XCode_PostalCode_3990>
+      </pfs-gcd:PostalCodeCity>
+      <pfs-gcd:CountryCode>
+        <pfs-vl:XCode_CountryCode_BE contextRef="CurrentDuration">BE</pfs-vl:XCode_CountryCode_BE>
+      </pfs-gcd:CountryCode>
+    </pfs-gcd:EntityAddress>
+    <pfs-gcd:CommercialCourt>
+      <pfs-vl:XCode_CommercialCourt_10 contextRef="CurrentDuration">10</pfs-vl:XCode_CommercialCourt_10>
+    </pfs-gcd:CommercialCourt>
+    <pfs-gcd:DepositDateLastDeed contextRef="CurrentInstant">2014-01-06</pfs-gcd:DepositDateLastDeed>
+  </pfs-gcd:EntityInformation>
+  <pfs:PeriodsCovered>
+    <pfs:PeriodStartDate contextRef="CurrentInstant">2015-07-01</pfs:PeriodStartDate>
+    <pfs:PeriodEndDate contextRef="CurrentInstant">2016-06-30</pfs:PeriodEndDate>
+    <pfs:PrecedingPeriodData contextRef="CurrentDuration">false</pfs:PrecedingPeriodData>
+    <pfs:AccountsApprovalDateGeneralAssembly contextRef="CurrentInstant">2016-12-05</pfs:AccountsApprovalDateGeneralAssembly>
+    <pfs:Schema>
+      <pfs-vl:XCode_SchemaCode_20 contextRef="CurrentDuration">20</pfs-vl:XCode_SchemaCode_20>
+    </pfs:Schema>
+  </pfs:PeriodsCovered>
+  <pfs:PeriodsCovered>
+    <pfs:PeriodStartDate contextRef="PrecedingInstant">2014-07-01</pfs:PeriodStartDate>
+    <pfs:PeriodEndDate contextRef="PrecedingInstant">2015-06-30</pfs:PeriodEndDate>
+  </pfs:PeriodsCovered>
+  <pfs:AdministratorIndividual>
+    <pfs:ParticipantIndividualName contextRef="CurrentDuration">Wouters</pfs:ParticipantIndividualName>
+    <pfs:ParticipantIndividualFirstName contextRef="CurrentDuration">Antoine</pfs:ParticipantIndividualFirstName>
+    <pfs:ParticipantAddress>
+      <pfs-gcd:AddressType>
+        <pfs-vl:XCode_AddressTypeCode_001 contextRef="CurrentDuration">001</pfs-vl:XCode_AddressTypeCode_001>
+      </pfs-gcd:AddressType>
+      <pfs-gcd:Street contextRef="CurrentDuration">Deusterstraat</pfs-gcd:Street>
+      <pfs-gcd:Number contextRef="CurrentDuration">34</pfs-gcd:Number>
+      <pfs-gcd:PostalCodeCity>
+        <pfs-vl:XCode_PostalCode_3990 contextRef="CurrentDuration">3990</pfs-vl:XCode_PostalCode_3990>
+      </pfs-gcd:PostalCodeCity>
+      <pfs-gcd:CountryCode>
+        <pfs-vl:XCode_CountryCode_BE contextRef="CurrentDuration">BE</pfs-vl:XCode_CountryCode_BE>
+      </pfs-gcd:CountryCode>
+    </pfs:ParticipantAddress>
+    <pfs:ParticipantMandate>
+      <pfs:ParticipantMandateFunction>
+        <pfs-vl:XCode_FunctionCode_30 contextRef="CurrentDuration">30</pfs-vl:XCode_FunctionCode_30>
+      </pfs:ParticipantMandateFunction>
+    </pfs:ParticipantMandate>
+  </pfs:AdministratorIndividual>
+  <pfs:FixedAssets decimals="INF" contextRef="CurrentInstant" unitRef="EUR">16681.76</pfs:FixedAssets>
+  <pfs:FixedAssets decimals="INF" contextRef="PrecedingInstant" unitRef="EUR">21738.70</pfs:FixedAssets>
+  <pfs:TangibleFixedAssets decimals="INF" contextRef="CurrentInstant" unitRef="EUR">16681.76</pfs:TangibleFixedAssets>
+  <pfs:TangibleFixedAssets decimals="INF" contextRef="PrecedingInstant" unitRef="EUR">21738.70</pfs:TangibleFixedAssets>
+  <pfs:PlantMachineryEquipment decimals="INF" contextRef="CurrentInstant" unitRef="EUR">404.27</pfs:PlantMachineryEquipment>
+  <pfs:FurnitureVehicles decimals="INF" contextRef="CurrentInstant" unitRef="EUR">16066.61</pfs:FurnitureVehicles>
+  <pfs:FurnitureVehicles decimals="INF" contextRef="PrecedingInstant" unitRef="EUR">21422.15</pfs:FurnitureVehicles>
+  <pfs:OtherTangibleAssets decimals="INF" contextRef="CurrentInstant" unitRef="EUR">210.88</pfs:OtherTangibleAssets>
+  <pfs:OtherTangibleAssets decimals="INF" contextRef="PrecedingInstant" unitRef="EUR">316.55</pfs:OtherTangibleAssets>
+  <pfs:CurrentsAssets decimals="INF" contextRef="CurrentInstant" unitRef="EUR">163563.85</pfs:CurrentsAssets>
+  <pfs:CurrentsAssets decimals="INF" contextRef="PrecedingInstant" unitRef="EUR">182304.33</pfs:CurrentsAssets>
+  <pfs:AmountsReceivableWithinOneYear decimals="INF" contextRef="CurrentInstant" unitRef="EUR">21000.00</pfs:AmountsReceivableWithinOneYear>
+  <pfs:AmountsReceivableWithinOneYear decimals="INF" contextRef="PrecedingInstant" unitRef="EUR">29014.58</pfs:AmountsReceivableWithinOneYear>
+  <pfs:TradeDebtorsWithinOneYear decimals="INF" contextRef="CurrentInstant" unitRef="EUR">21000.00</pfs:TradeDebtorsWithinOneYear>
+  <pfs:TradeDebtorsWithinOneYear decimals="INF" contextRef="PrecedingInstant" unitRef="EUR">24500.00</pfs:TradeDebtorsWithinOneYear>
+  <pfs:OtherAmountsReceivableWithinOneYear decimals="INF" contextRef="PrecedingInstant" unitRef="EUR">4514.58</pfs:OtherAmountsReceivableWithinOneYear>
+  <pfs:CashBankHand decimals="INF" contextRef="CurrentInstant" unitRef="EUR">142152.98</pfs:CashBankHand>
+  <pfs:CashBankHand decimals="INF" contextRef="PrecedingInstant" unitRef="EUR">151646.00</pfs:CashBankHand>
+  <pfs:DeferredChargesAccruedIncome decimals="INF" contextRef="CurrentInstant" unitRef="EUR">410.87</pfs:DeferredChargesAccruedIncome>
+  <pfs:DeferredChargesAccruedIncome decimals="INF" contextRef="PrecedingInstant" unitRef="EUR">1643.75</pfs:DeferredChargesAccruedIncome>
+  <pfs:Assets decimals="INF" contextRef="CurrentInstant" unitRef="EUR">180245.61</pfs:Assets>
+  <pfs:Assets decimals="INF" contextRef="PrecedingInstant" unitRef="EUR">204043.03</pfs:Assets>
+  <pfs:Equity decimals="INF" contextRef="CurrentInstant" unitRef="EUR">157874.44</pfs:Equity>
+  <pfs:Equity decimals="INF" contextRef="PrecedingInstant" unitRef="EUR">173455.78</pfs:Equity>
+  <pfs:Capital decimals="INF" contextRef="CurrentInstant" unitRef="EUR">117550.00</pfs:Capital>
+  <pfs:Capital decimals="INF" contextRef="PrecedingInstant" unitRef="EUR">117550.00</pfs:Capital>
+  <pfs:IssuedCapital decimals="INF" contextRef="CurrentInstant" unitRef="EUR">117550.00</pfs:IssuedCapital>
+  <pfs:IssuedCapital decimals="INF" contextRef="PrecedingInstant" unitRef="EUR">117550.00</pfs:IssuedCapital>
+  <pfs:Reserves decimals="INF" contextRef="CurrentInstant" unitRef="EUR">55905.78</pfs:Reserves>
+  <pfs:Reserves decimals="INF" contextRef="PrecedingInstant" unitRef="EUR">55905.78</pfs:Reserves>
+  <pfs:LegalReserve decimals="INF" contextRef="CurrentInstant" unitRef="EUR">4501.52</pfs:LegalReserve>
+  <pfs:LegalReserve decimals="INF" contextRef="PrecedingInstant" unitRef="EUR">4501.52</pfs:LegalReserve>
+  <pfs:UntaxedReserves decimals="INF" contextRef="CurrentInstant" unitRef="EUR">5000.00</pfs:UntaxedReserves>
+  <pfs:UntaxedReserves decimals="INF" contextRef="PrecedingInstant" unitRef="EUR">5000.00</pfs:UntaxedReserves>
+  <pfs:AvailableReserves decimals="INF" contextRef="CurrentInstant" unitRef="EUR">46404.26</pfs:AvailableReserves>
+  <pfs:AvailableReserves decimals="INF" contextRef="PrecedingInstant" unitRef="EUR">46404.26</pfs:AvailableReserves>
+  <pfs:AccumulatedProfitsLosses decimals="INF" contextRef="CurrentInstant" unitRef="EUR">-15581.34</pfs:AccumulatedProfitsLosses>
+  <pfs:AmountsPayable decimals="INF" contextRef="CurrentInstant" unitRef="EUR">22371.17</pfs:AmountsPayable>
+  <pfs:AmountsPayable decimals="INF" contextRef="PrecedingInstant" unitRef="EUR">30587.25</pfs:AmountsPayable>
+  <pfs:AmountsPayableMoreOneYear decimals="INF" contextRef="CurrentInstant" unitRef="EUR">10559.69</pfs:AmountsPayableMoreOneYear>
+  <pfs:AmountsPayableMoreOneYear decimals="INF" contextRef="PrecedingInstant" unitRef="EUR">14516.27</pfs:AmountsPayableMoreOneYear>
+  <pfs:FinancialDebtsRemainingTermMoreOneYear decimals="INF" contextRef="CurrentInstant" unitRef="EUR">10559.69</pfs:FinancialDebtsRemainingTermMoreOneYear>
+  <pfs:FinancialDebtsRemainingTermMoreOneYear decimals="INF" contextRef="PrecedingInstant" unitRef="EUR">14516.27</pfs:FinancialDebtsRemainingTermMoreOneYear>
+  <pfs:AmountsPayableMoreOneYearCreditInstitutionsLeasingOtherSimilarObligations decimals="INF" contextRef="CurrentInstant" unitRef="EUR">10559.69</pfs:AmountsPayableMoreOneYearCreditInstitutionsLeasingOtherSimilarObligations>
+  <pfs:AmountsPayableMoreOneYearCreditInstitutionsLeasingOtherSimilarObligations decimals="INF" contextRef="PrecedingInstant" unitRef="EUR">14516.27</pfs:AmountsPayableMoreOneYearCreditInstitutionsLeasingOtherSimilarObligations>
+  <pfs:AmountsPayableWithinOneYear decimals="INF" contextRef="CurrentInstant" unitRef="EUR">11811.48</pfs:AmountsPayableWithinOneYear>
+  <pfs:AmountsPayableWithinOneYear decimals="INF" contextRef="PrecedingInstant" unitRef="EUR">16070.98</pfs:AmountsPayableWithinOneYear>
+  <pfs:CurrentPortionAmountsPayableMoreOneYearFallingDueWithinOneYear decimals="INF" contextRef="CurrentInstant" unitRef="EUR">3956.58</pfs:CurrentPortionAmountsPayableMoreOneYearFallingDueWithinOneYear>
+  <pfs:CurrentPortionAmountsPayableMoreOneYearFallingDueWithinOneYear decimals="INF" contextRef="PrecedingInstant" unitRef="EUR">3885.46</pfs:CurrentPortionAmountsPayableMoreOneYearFallingDueWithinOneYear>
+  <pfs:TradeDebtsPayableWithinOneYear decimals="INF" contextRef="CurrentInstant" unitRef="EUR">92.68</pfs:TradeDebtsPayableWithinOneYear>
+  <pfs:TradeDebtsPayableWithinOneYear decimals="INF" contextRef="PrecedingInstant" unitRef="EUR">3288.23</pfs:TradeDebtsPayableWithinOneYear>
+  <pfs:SuppliersInvoicesToReceiveWithinOneYear decimals="INF" contextRef="CurrentInstant" unitRef="EUR">92.68</pfs:SuppliersInvoicesToReceiveWithinOneYear>
+  <pfs:SuppliersInvoicesToReceiveWithinOneYear decimals="INF" contextRef="PrecedingInstant" unitRef="EUR">3288.23</pfs:SuppliersInvoicesToReceiveWithinOneYear>
+  <pfs:TaxesRemunerationSocialSecurity decimals="INF" contextRef="CurrentInstant" unitRef="EUR">2269.42</pfs:TaxesRemunerationSocialSecurity>
+  <pfs:TaxesRemunerationSocialSecurity decimals="INF" contextRef="PrecedingInstant" unitRef="EUR">8897.29</pfs:TaxesRemunerationSocialSecurity>
+  <pfs:Taxes decimals="INF" contextRef="CurrentInstant" unitRef="EUR">2269.42</pfs:Taxes>
+  <pfs:Taxes decimals="INF" contextRef="PrecedingInstant" unitRef="EUR">8897.29</pfs:Taxes>
+  <pfs:OtherAmountsPayableWithinOneYear decimals="INF" contextRef="CurrentInstant" unitRef="EUR">5492.80</pfs:OtherAmountsPayableWithinOneYear>
+  <pfs:EquityLiabilities decimals="INF" contextRef="CurrentInstant" unitRef="EUR">180245.61</pfs:EquityLiabilities>
+  <pfs:EquityLiabilities decimals="INF" contextRef="PrecedingInstant" unitRef="EUR">204043.03</pfs:EquityLiabilities>
+  <pfs:GrossOperatingMargin decimals="INF" contextRef="CurrentDuration" unitRef="EUR">-8150.32</pfs:GrossOperatingMargin>
+  <pfs:GrossOperatingMargin decimals="INF" contextRef="PrecedingDuration" unitRef="EUR">22635.99</pfs:GrossOperatingMargin>
+  <pfs:DepreciationOtherAmountsWrittenDownFormationExpensesIntangibleTangibleFixedAssets decimals="INF" contextRef="CurrentDuration" unitRef="EUR">5663.31</pfs:DepreciationOtherAmountsWrittenDownFormationExpensesIntangibleTangibleFixedAssets>
+  <pfs:DepreciationOtherAmountsWrittenDownFormationExpensesIntangibleTangibleFixedAssets decimals="INF" contextRef="PrecedingDuration" unitRef="EUR">5675.37</pfs:DepreciationOtherAmountsWrittenDownFormationExpensesIntangibleTangibleFixedAssets>
+  <pfs:MiscellaneousOperatingCharges decimals="INF" contextRef="CurrentDuration" unitRef="EUR">1075.29</pfs:MiscellaneousOperatingCharges>
+  <pfs:MiscellaneousOperatingCharges decimals="INF" contextRef="PrecedingDuration" unitRef="EUR">1809.52</pfs:MiscellaneousOperatingCharges>
+  <pfs:OperatingProfitLoss decimals="INF" contextRef="CurrentDuration" unitRef="EUR">-14888.92</pfs:OperatingProfitLoss>
+  <pfs:OperatingProfitLoss decimals="INF" contextRef="PrecedingDuration" unitRef="EUR">15151.10</pfs:OperatingProfitLoss>
+  <pfs:FinancialIncome decimals="INF" contextRef="CurrentDuration" unitRef="EUR">0.04</pfs:FinancialIncome>
+  <pfs:FinancialIncome decimals="INF" contextRef="PrecedingDuration" unitRef="EUR">75.33</pfs:FinancialIncome>
+  <pfs:FinancialCharges decimals="INF" contextRef="CurrentDuration" unitRef="EUR">494.63</pfs:FinancialCharges>
+  <pfs:FinancialCharges decimals="INF" contextRef="PrecedingDuration" unitRef="EUR">500.64</pfs:FinancialCharges>
+  <pfs:GainLossOrdinaryActivitiesBeforeTaxes decimals="INF" contextRef="CurrentDuration" unitRef="EUR">-15383.51</pfs:GainLossOrdinaryActivitiesBeforeTaxes>
+  <pfs:GainLossOrdinaryActivitiesBeforeTaxes decimals="INF" contextRef="PrecedingDuration" unitRef="EUR">14725.79</pfs:GainLossOrdinaryActivitiesBeforeTaxes>
+  <pfs:ExtraordinaryIncome decimals="INF" contextRef="PrecedingDuration" unitRef="EUR">8597.28</pfs:ExtraordinaryIncome>
+  <pfs:GainLossBeforeTaxes decimals="INF" contextRef="CurrentDuration" unitRef="EUR">-15383.51</pfs:GainLossBeforeTaxes>
+  <pfs:GainLossBeforeTaxes decimals="INF" contextRef="PrecedingDuration" unitRef="EUR">23323.07</pfs:GainLossBeforeTaxes>
+  <pfs:IncomeTaxes decimals="INF" contextRef="CurrentDuration" unitRef="EUR">197.83</pfs:IncomeTaxes>
+  <pfs:IncomeTaxes decimals="INF" contextRef="PrecedingDuration" unitRef="EUR">5392.70</pfs:IncomeTaxes>
+  <pfs:GainLossPeriod decimals="INF" contextRef="CurrentDuration" unitRef="EUR">-15581.34</pfs:GainLossPeriod>
+  <pfs:GainLossPeriod decimals="INF" contextRef="PrecedingDuration" unitRef="EUR">17930.37</pfs:GainLossPeriod>
+  <pfs:GainLossToBeAppropriated decimals="INF" contextRef="CurrentDuration" unitRef="EUR">-15581.34</pfs:GainLossToBeAppropriated>
+  <pfs:GainLossToBeAppropriated decimals="INF" contextRef="PrecedingDuration" unitRef="EUR">17930.37</pfs:GainLossToBeAppropriated>
+  <pfs:ProfitLossToBeAppropriated decimals="INF" contextRef="CurrentDuration" unitRef="EUR">-15581.34</pfs:ProfitLossToBeAppropriated>
+  <pfs:ProfitLossToBeAppropriated decimals="INF" contextRef="PrecedingDuration" unitRef="EUR">22300.78</pfs:ProfitLossToBeAppropriated>
+  <pfs:TransfersToCapitalReserves decimals="INF" contextRef="PrecedingDuration" unitRef="EUR">22300.78</pfs:TransfersToCapitalReserves>
+  <pfs:AppropriationsLegalReserve decimals="INF" contextRef="PrecedingDuration" unitRef="EUR">896.52</pfs:AppropriationsLegalReserve>
+  <pfs:AppropriationsOtherReserves decimals="INF" contextRef="PrecedingDuration" unitRef="EUR">21404.26</pfs:AppropriationsOtherReserves>
+  <pfs:AccumulatedProfitsLosses decimals="INF" contextRef="N-2Instant" unitRef="EUR">4370.41</pfs:AccumulatedProfitsLosses>
+  <pfs:TangibleFixedAssetsAcquisitionValue decimals="INF" contextRef="PrecedingInstant" unitRef="EUR">58220.35</pfs:TangibleFixedAssetsAcquisitionValue>
+  <pfs:TangibleFixedAssetsAcquisitionIncludingProducedFixedAssets decimals="INF" contextRef="CurrentDuration" unitRef="EUR">606.37</pfs:TangibleFixedAssetsAcquisitionIncludingProducedFixedAssets>
+  <pfs:TangibleFixedAssetsSalesDisposals decimals="INF" contextRef="CurrentDuration" unitRef="EUR">1042.40</pfs:TangibleFixedAssetsSalesDisposals>
+  <pfs:TangibleFixedAssetsAcquisitionValue decimals="INF" contextRef="CurrentInstant" unitRef="EUR">57784.32</pfs:TangibleFixedAssetsAcquisitionValue>
+  <pfs:TangibleFixedAssetsDepreciationsAmountWrittenDown decimals="INF" contextRef="PrecedingInstant" unitRef="EUR">36481.65</pfs:TangibleFixedAssetsDepreciationsAmountWrittenDown>
+  <pfs:TangibleFixedAssetsDepreciationsAmountWrittenDownRecorded decimals="INF" contextRef="CurrentDuration" unitRef="EUR">5663.31</pfs:TangibleFixedAssetsDepreciationsAmountWrittenDownRecorded>
+  <pfs:TangibleFixedAssetsDepreciationsAmountWrittenDownCancelledOwingSalesDisposals decimals="INF" contextRef="CurrentDuration" unitRef="EUR">1042.40</pfs:TangibleFixedAssetsDepreciationsAmountWrittenDownCancelledOwingSalesDisposals>
+  <pfs:TangibleFixedAssetsDepreciationsAmountWrittenDown decimals="INF" contextRef="CurrentInstant" unitRef="EUR">41102.56</pfs:TangibleFixedAssetsDepreciationsAmountWrittenDown>
+  <pfs:AmountsPayableMoreOneYearMoreOneNotMoreFiveYears decimals="INF" contextRef="CurrentInstant" unitRef="EUR">10559.69</pfs:AmountsPayableMoreOneYearMoreOneNotMoreFiveYears>
+  <pfs:DifferentCategoriesShares>
+    <pfs:DifferentCategoriesSharesTitle contextRef="CurrentInstant">Aandelen op naam</pfs:DifferentCategoriesSharesTitle>
+    <pfs:DifferentCategoriesSharesValue decimals="INF" contextRef="CurrentInstant" unitRef="EUR">117550.00</pfs:DifferentCategoriesSharesValue>
+    <pfs:DifferentCategoriesSharesNumberShares decimals="INF" contextRef="CurrentInstant" unitRef="U-Shares">100</pfs:DifferentCategoriesSharesNumberShares>
+  </pfs:DifferentCategoriesShares>
+  <pfs:ValuationRulesText contextRef="CurrentDuration">SAMENVATTING VAN DE WAARDERINGSREGELS 
+I. BEGINSEL 
+De waarderingsregels worden vastgesteld overeenkomstig de bepalingen van het Koninklijk besluit van 30 januari 2001 tot uitvoering van het Wetboek van vennootschappen. 
+Ten behoeve van het getrouwe beeld wordt in de volgende uitzonderingsgevallen afgeweken van de bij dit besluit bepaalde waarderingsregels: 
+Deze afwijkingen worden als volgt verantwoord: 
+Deze afwijkingen beïnvloeden als volgt het vermogen, de financiële positie en het resultaat vóór belasting van de onderneming: 
+De waarderingsregels werden ten opzichte van het vorige boekjaar qua verwoording of toepassing niet gewijzigd;
+zo ja, dan heeft de wijziging betrekking op:
+en heeft een [positieve] [negatieve] invloed op het resultaat van het boekjaar vóór belasting ten belope van            EUR. 
+De resultatenrekening wordt niet op belangrijke wijze beïnvloed door opbrengsten en kosten die aan een vorig boekjaar moeten worden toegerekend; zo ja, dan hebben deze betrekking op: 
+De cijfers van het boekjaar zijn niet vergelijkbaar met die van het vorige boekjaar en wel om de volgende reden:
+[Voor de vergelijkbaarheid worden de cijfers van het vorige boekjaar op volgende punten aangepast] [Voor de vergelijking van de jaarrekeningen van beide boekjaren moet met volgende elementen rekening worden gehouden]:
+Bij gebrek aan objectieve beoordelingscriteria is de waardering van de voorzienbare risico's, mogelijke verliezen en ontwaardingen waarvan hierna sprake, onvermijdelijk aleatoir:
+Andere inlichtingen die noodzakelijk zijn opdat de jaarrekening een getrouw beeld zou geven van het vermogen, de financiële positie en het resultaat van de onderneming:
+
+II. BIJZONDERE REGELS 
+Oprichtingskosten:
+De oprichtingskosten worden onmiddellijk ten laste genomen, behoudens volgende kosten die worden geactiveerd:
+Herstructureringskosten:
+De herstructureringskosten werden niet geactiveerd in de loop van het boekjaar; zo ja, dan wordt dit als volgt verantwoord:
+Immateriële vaste activa:
+Het bedrag aan immateriële vaste activa omvat voor     0,00     EUR kosten van onderzoek en ontwikkeling. De afschrijvingstermijn voor deze kosten en voor de goodwill beloopt [meer] [niet meer] dan 5 jaar; indien meer dan 5 jaar wordt deze termijn als volgt verantwoord:
+Materiële vaste activa:
+In de loop van het boekjaar werden geen materiële vaste activa geherwaardeerd; zo ja, dan wordt deze herwaardering als volgt verantwoord:
+Afschrijvingen geboekt tijdens het boekjaar: 
+Activa 			Methode 	Basis	Afschrijvingspercentages 
+					Hoofdsom 			Bijkomende kosten 
+Oprichtingskosten 
+Immateriële vaste activa 
+Industr., adm. of commerc.gebouwen
+Installaties, machines en uitrusting 	NG 	L 	33,33-33,33
+Rollend materieel 
+1) Personenwagens	NG 	L 			20,00-20,00 
+Kantoormaterieel en meubilair 
+1) Meubilair en materieel NG 	L 			20,00-20,00
+
+Andere materiële vaste activa
+1) Inrichting gebouwen 	NG 	L 			10,00-10,00
+
+Overschot aan toegepaste, fiscaal aftrekbare, versnelde afschrijvingen, ten opzichte van de economische verantwoorde afschrijvingen: 
+- bedrag voor het boekjaar:      0      EUR
+- gecumuleerd bedrag voor de vaste activa verworven vanaf het boekjaar dat begint na 31 december 1983:     0     EUR 
+Financiële vaste activa: In de loop van het boekjaar werden geen deelnemingen geherwaardeerd; zo ja, dan wordt deze herwaardering als volgt verantwoord:
+Voorraden:
+Voorraden worden gewaardeerd tegen de aanschaffingswaarde berekend volgens de (te vermelden) methode van de gewogen gemiddelde prijzen, Fifo, Lifo, individualisering van de prijs van elk bestanddeel of tegen de lagere marktwaarde:
+1. grond- en hulpstoffen:
+2. Goederen in bewerking - gereed product:
+3. Handelsgoederen:
+4. Onroerende goederen bestemd voor verkoop: 
+Producten:
+- De vervaardigingsprijs van de producten [omvat [omvat niet] de onrechtstreekse productiekosten.
+- De vervaardigingsprijs van de producten waarvan de productie meer dan één jaar beslaat, [omvat [omvat geen] financiële kosten verbonden aan de kapitalen ontleend om de productie ervan te financiëren.
+Bij het einde van het boekjaar bedraagt de marktwaarde van de totale voorraden ongeveer 0 % meer dan hun boekwaarde. (Deze inlichting is slechts vereist zo het verschil belangrijk is). 
+Bestellingen in uitvoering:
+Bestellingen in uitvoering worden gewaardeerd (tegen vervaardigingsprijs) (tegen vervaardigingsprijs, verhoogd met een gedeelte van het resultaat naar gelang van de vordering der werken). 
+Schulden: De passiva] [bevatten geen] schulden op lange termijn, zonder rente of met een abnormaal lage rente; zo ja, dan wordt op deze schulden [een] [geen] disconto toegepast dat wordt geactiveerd. 
+Vreemde valuta: De omrekening in EUR van tegoeden, schulden en verbintenissen in vreemde valuta gebeurt op volgende grondslagen: De resultaten uit de omrekening van vreemde valuta zijn als volgt in de jaarrekening verwerkt: 
+Leasingovereenkomsten: Wat de niet-geactiveerde gebruiksrechten uit leasingovereenkomsten betreft (artikel 102, § 1 van het koninklijk besluit van 30 januari 2001 tot uitvoering van het Wetboek van vennootschappen), beliepen de vergoedingen en huurgelden die betrekking hebben op het boekjaar voor leasing van onroerende goederen:    0    EUR.</pfs:ValuationRulesText>
+  <pfs-gcd:DocumentInformation>
+    <pfs-gcd:DocumentIdentifier contextRef="CurrentDuration">Jaarrekening</pfs-gcd:DocumentIdentifier>
+    <pfs-gcd:DocumentLanguage>
+      <pfs-vl:XCode_LanguageCode_NL contextRef="CurrentDuration">NL</pfs-vl:XCode_LanguageCode_NL>
+    </pfs-gcd:DocumentLanguage>
+    
+  </pfs-gcd:DocumentInformation>
+  </xbrli:xbrl>
