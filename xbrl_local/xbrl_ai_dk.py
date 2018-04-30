@@ -8,7 +8,7 @@ Created on Wed Jan 31 09:10:49 2018
 import time
 import collections
 import requests
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date as datetype
 from sklearn.base import BaseEstimator, TransformerMixin
 import numpy as np
 from elasticsearch1 import Elasticsearch
@@ -262,10 +262,10 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
         if lang is not None:
             lang = 'lang:' + lang
         # identificer = context[0]
-        startdate = context[2]
-        enddate = context[3]
-        instant = context[4]
-        if not isinstance(enddate, str):
+        startdate = datetime.strptime(context[2], "%Y-%m-%d").date() if context[2] is not None else None
+        enddate = datetime.strptime(context[3], "%Y-%m-%d").date() if context[3] is not None else None
+        instant = datetime.strptime(context[4], "%Y-%m-%d").date() if context[4] is not None else None
+        if not isinstance(enddate, datetype):
             enddate = instant
         explicit = context[5]
         typed = context[6]
@@ -351,12 +351,16 @@ def xbrl_dk_64_to_xbrl_dk_11(dict64, metadata = False):
         = PredingReportingPeriodEndDate_temp = None
     for post in dict64:
         if post[0] == 'gsd:ReportingPeriodStartDate':
+            dict64[post][0] = datetime.strptime(dict64[post][0], "%Y-%m-%d").date()
             ReportingPeriodStartDate = (dict64[post])[0]
         if post[0] == 'gsd:ReportingPeriodEndDate':
+            dict64[post][0] = datetime.strptime(dict64[post][0], "%Y-%m-%d").date()
             ReportingPeriodEndDate = (dict64[post])[0]
         if post[0] == 'gsd:PrecedingReportingPeriodStartDate':
+            dict64[post][0] = datetime.strptime(dict64[post][0], "%Y-%m-%d").date()
             PrecedingReportingPeriodStartDate = (dict64[post])[0]
         if post[0] == 'gsd:PredingReportingPeriodEndDate':
+            dict64[post][0] = datetime.strptime(dict64[post][0], "%Y-%m-%d").date()
             PredingReportingPeriodEndDate = (dict64[post])[0]
         if post[4] is True:
             koncern = True
@@ -376,6 +380,7 @@ def xbrl_dk_64_to_xbrl_dk_11(dict64, metadata = False):
             else:
                 languages[post[5]] = languages[post[5]] + 1
 
+        
     unit = None
     language = None
     
@@ -394,7 +399,7 @@ def xbrl_dk_64_to_xbrl_dk_11(dict64, metadata = False):
             PredingReportingPeriodEndDate is None:
         try:
             PredingReportingPeriodEndDate_temp\
-                = str(datetime.strptime(ReportingPeriodStartDate, '%Y-%m-%d') - timedelta(days=1))[:10]
+                = ReportingPeriodStartDate - timedelta(days=1)
         except:
             PredingReportingPeriodEndDate_temp = '4711-11-11'
     periodmax = 0
