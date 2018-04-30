@@ -102,6 +102,48 @@ def xbrlinstance_to_dict(xbrlinstance):
     for opryd in ('{http://www.xbrl.org/2003/instance}context',
                   '{http://www.xbrl.org/2003/instance}unit'):
         del xbrldict[opryd]
+
+    def modificer_xbrl(xbrldict1):
+        xbrldict2 = {}
+        modified = False
+        for concept in xbrldict1:
+            if isinstance(xbrldict1[concept], list):            
+                for i in range(0, len(xbrldict1[concept])):
+                    for u in xbrldict1[concept][i]:
+                        type_list = type(xbrldict1[concept][i][u]).__name__
+                        break
+                if type_list not in ('OrderedDict', 'list'):
+                    xbrldict2[concept] = xbrldict1[concept]
+                elif type_list in ('OrderedDict', 'list'):
+                    for u in xbrldict1[concept][i]:
+                        modified = True
+                        xbrldict2[u] = xbrldict1[concept][i][u]
+                else:
+                    pass
+            elif isinstance(xbrldict1[concept], dict):
+                for i in xbrldict1[concept].keys():
+                    type_in_dict = type(xbrldict1[concept][i]).__name__
+                    break
+                if type_in_dict not in ('OrderedDict', 'list'):
+                    xbrldict2[concept] = xbrldict1[concept]  
+                elif type_in_dict == 'list':
+                    for u in xbrldict1[concept]:
+                        modified = True
+                        xbrldict2[u] = xbrldict1[concept][u]
+                elif type_in_dict == 'OrderedDict':
+                    for u in xbrldict1[concept].keys():
+                        modified = True
+                        xbrldict2[u] = xbrldict1[concept][u]
+                else:
+                    pass
+            else:
+                xbrldict2[concept] = xbrldict1[concept]                
+        return xbrldict2, modified
+       
+    andret = True
+    while andret == True:
+        xbrldict, andret = modificer_xbrl(xbrldict)    
+
     # Add unit and context infdromation on concepts
     for concept in xbrldict:
         if isinstance(xbrldict[concept], dict):
