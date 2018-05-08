@@ -305,9 +305,9 @@ def xbrldict_to_xbrl_dk_64(xbrldict):
                     nogle = (concept, startdate, enddate, label_typed_id, koncern, unit)
                     if nogle in dict64 and dict64[nogle][0] != value:
                         if unit is None:
-                            value = str(value) + ' ' + str(dict64[nogle][0])
+                            value = value + ' ' + str(dict64[nogle][0])
                         elif isinstance(value, str):
-                            value = value + ' ' + dict64[nogle][0]                            
+                            value = value + ' ' + str(dict64[nogle][0])                            
                         else:
                             if value == 0:
                                 value = dict64[nogle][0]
