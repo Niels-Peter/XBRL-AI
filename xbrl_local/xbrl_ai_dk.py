@@ -76,7 +76,7 @@ def fetchlist_dk(cvrnummer, date='dd', reports='AARSRAPPORT', style='dict'):
     if date == 'dd':
         date = time.strftime("%Y-%m-%d")
     returnstatement = None
-    url = 'http://distribution.virk.dk/offentliggoerelser/_search?q=cvrNummer:"' + cvrnummer + '"'
+    url = 'http://distribution-legacy.virk.dk/offentliggoerelser/_search?q=cvrNummer:"' + cvrnummer + '"'
     reg = requests.get(url)
     json = reg.json()
     indhold = json['hits']['hits']
@@ -121,7 +121,7 @@ def scanscroll_fetchlist_dk(slutDato, startDato='slutDato', format='publishTime'
         queries =  {"query": {"range" : {"regnskab.regnskabsperiode.slutDato" : {"gte": startDato + "T00:00:00.000", "lte": slutDato + "T23:59:59.999", "time_zone": "+1:00"}}}}
     else:
         return None
-    url = 'http://distribution.virk.dk:80'
+    url = 'http://distribution-legacy.virk.dk:80'
     index = 'offentliggoerelser'
     elastic_client = Elasticsearch(url, timeout=60, max_retries=10, retry_on_timeout=True)
     elastic_search_scan_size = 128
