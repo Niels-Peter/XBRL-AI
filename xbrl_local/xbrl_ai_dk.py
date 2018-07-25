@@ -76,7 +76,7 @@ def fetchlist_dk(cvrnummer, date='dd', reports='AARSRAPPORT', style='dict'):
     if date == 'dd':
         date = time.strftime("%Y-%m-%d")
     returnstatement = None
-    url = 'http://distribution-legacy.virk.dk/offentliggoerelser/_search?q=cvrNummer:"' + cvrnummer + '"'
+    url = 'http://distribution-legacy.virk.dk/offentliggoerelser/_search?q=cvrNummer:"' + cvrnummer + '"&size=100'
     reg = requests.get(url)
     json = reg.json()
     indhold = json['hits']['hits']
@@ -469,4 +469,6 @@ class xbrl_to_dk_11(BaseEstimator, TransformerMixin):
             except:
                 pass
         return outputdata
+ 
     
+linkdata = fetchlist_dk('11964346', '2016-08-31')    
