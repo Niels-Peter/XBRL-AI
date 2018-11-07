@@ -11,8 +11,10 @@ import requests
 from datetime import datetime, timedelta
 from sklearn.base import BaseEstimator, TransformerMixin
 import numpy as np
-from elasticsearch1 import Elasticsearch
-from elasticsearch1_dsl import Search
+import json
+import itertools
+#from elasticsearch1 import Elasticsearch
+#from elasticsearch1_dsl import Search
 
 from xbrl_ai import xbrlinstance_to_dict
 
@@ -76,7 +78,7 @@ def fetchlist_dk(cvrnummer, date='dd', reports='AARSRAPPORT', style='dict'):
     if date == 'dd':
         date = time.strftime("%Y-%m-%d")
     returnstatement = None
-    url = 'http://distribution-legacy.virk.dk/offentliggoerelser/_search?q=cvrNummer:"' + cvrnummer + '"&size=100'
+    url = 'http://distribution.virk.dk/offentliggoerelser/_search?q=cvrNummer:"' + cvrnummer + '"&size=100'
     reg = requests.get(url)
     json = reg.json()
     indhold = json['hits']['hits']
@@ -116,30 +118,32 @@ def scanscroll_fetchlist_dk(slutDato, startDato='slutDato', format='publishTime'
     if startDato == 'slutDato':
         startDato = slutDato 
     if format == 'publishTime':
-        queries =  {"query": {"range" : {"offentliggoerelsesTidspunkt" : {"gte": startDato + "T00:00:00.000", "lte": slutDato + "T23:59:59.999", "time_zone": "+1:00"}}}}
+        queries =  {"query": {"range": {"offentliggoerelsesTidspunkt": {"gte": startDato + "T00:00:00.000", "lte": slutDato + "T23:59:59.999", "time_zone": "+01:00"}}}}
     elif format == 'periodEndDate':
-        queries =  {"query": {"range" : {"regnskab.regnskabsperiode.slutDato" : {"gte": startDato + "T00:00:00.000", "lte": slutDato + "T23:59:59.999", "time_zone": "+1:00"}}}}
+        queries =  {"query": {"range": {"regnskab.regnskabsperiode.slutDato": {"gte": startDato + "T00:00:00.000", "lte": slutDato + "T23:59:59.999", "time_zone": "+01:00"}}}}
     else:
-        return None
-    url = 'http://distribution-legacy.virk.dk:80'
-    index = 'offentliggoerelser'
-    elastic_client = Elasticsearch(url, timeout=60, max_retries=10, retry_on_timeout=True)
-    elastic_search_scan_size = 128
-    elastic_search_scroll_time = u'5m'
-    # set elastic search params
-    params = {'scroll': elastic_search_scroll_time, 'size': elastic_search_scan_size}    
-    # create elasticsearch search object
-    search = Search(using=elastic_client, index=index)
-    search.update_from_dict(queries)
-    search = search.params(**params)      
-    #print('ElasticSearch Download Scan Query: ', search.to_dict())
-    generator = search.scan()
-    generator = enumerate(generator)
+        return None   
+    url = 'http://distribution.virk.dk/offentliggoerelser/_search?'
+    param = {'size': '128', 'scroll': u'5m'}
     result = []
-    for index, obj in generator:
-        post = obj.to_dict()
+    reg = requests.post(url, timeout=60, params=param, data=json.dumps(queries), headers={'Content-Type': 'application/json'})
+    jsondata = reg.json()
+    sid = jsondata['_scroll_id']
+    antal = len(jsondata['hits']['hits'])
+    modtaget = jsondata['hits']['hits']  
+    while antal > 0:
+        param = {'scroll': u'5m', 'scroll_id': jsondata['_scroll_id']}
+        url = 'http://distribution.virk.dk/_search/scroll?'
+        reg = requests.post(url, params=param)
+        jsondata = reg.json()
+        sid = jsondata['_scroll_id']
+        indhold = jsondata['hits']['hits']
+        modtaget = itertools.chain(modtaget, indhold)
+        antal = len(indhold)   
+    for forekomst in modtaget:
         dict_post = {}
-        dict_post['_id'] = obj.meta['id']
+        dict_post['_id'] = forekomst['_id']
+        post = forekomst['_source']
         dict_post['cvrNummer'] = post['cvrNummer']
         dict_post['regNummer'] = post['regNummer']
         dict_post['offentliggoerelsesTidspunkt'] = post['offentliggoerelsesTidspunkt']
@@ -156,6 +160,7 @@ def scanscroll_fetchlist_dk(slutDato, startDato='slutDato', format='publishTime'
         result.append(dict_post) 
     return result
 
+#list_of_data = scanscroll_fetchlist_dk('2016-01-31', '2016-01-01')
 
 def xbrldict_to_xbrl_dk_64(xbrldict):
     """
@@ -470,5 +475,3 @@ class xbrl_to_dk_11(BaseEstimator, TransformerMixin):
                 pass
         return outputdata
  
-    
-linkdata = fetchlist_dk('11964346', '2016-08-31')    
